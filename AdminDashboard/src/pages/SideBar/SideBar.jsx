@@ -1,11 +1,11 @@
 import React from 'react'
 
-function test() {
+function SideBar() {
   return (
     <div>
-      
+      kfps,pssp
     </div>
   )
 }
 
-export default test
+export default SideBar
