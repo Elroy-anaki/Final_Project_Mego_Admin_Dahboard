@@ -8,9 +8,9 @@ import { AuthContext } from '../../../Contexts/AuthContext'
 
 
 
-const initialUserValues = {
-  userEmail: "",
-  userPassword: "",
+const initialEmployeeValues = {
+  employeeEmail: "",
+  employeePassword: "",
 };
 
 function SignUp() {
@@ -19,7 +19,7 @@ function SignUp() {
 
   const sendToServer = async (newEmployeeData) => {
     try {
-        const { data } = await axios.post(`http://localhost:3000/users/log-in`, newEmployeeData, {withCredentials: true})
+        const { data } = await axios.post(`http://localhost:3000/employees/sign-in`, newEmployeeData, {withCredentials: true})
         console.log(data)
         setIsAuth(true)
         
@@ -42,7 +42,7 @@ function SignUp() {
           
         </div>
         <Formik
-          initialValues={initialUserValues}
+          initialValues={initialEmployeeValues}
           // validationSchema={sigUpSchema}
           onSubmit={ async (values, actions) => {
             console.log(values);
@@ -76,7 +76,7 @@ function SignUp() {
                 <Input
                   // error={errors.email}
                   label="Email"
-                  name="userEmail"
+                  name="employeeEmail"
                   type="email"
                   required
                   className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
@@ -88,7 +88,7 @@ function SignUp() {
                 <Input
                   // error={errors.password}
                   label="Password"
-                  name="userPassword"
+                  name="employeePassword"
                   type="password"
                   required
                   className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
