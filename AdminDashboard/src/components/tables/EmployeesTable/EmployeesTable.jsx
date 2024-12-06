@@ -1,62 +1,46 @@
 import React, { useState } from 'react';
-import { Pencil, Trash2 } from 'lucide-react';
+import EmployeeRow from './EmployeeRow';
+import { useQuery } from '@tanstack/react-query'
+import axios from 'axios';
 
-const UsersTable = () => {
-  // Sample data - in reality this would likely come from props or an API
-  const [users, setUsers] = useState([
-    { id: 1, name: 'John Doe', email: 'john@example.com', permission: 'Admin' },
-    { id: 2, name: 'Sarah Smith', email: 'sarah@example.com', permission: 'Editor' },
-    { id: 3, name: 'Mike Johnson', email: 'mike@example.com', permission: 'User' },
-  ]);
+const testArray = [{ id: 1, userName: 'John Doe', userEmail: 'john@example.com', userPermission: 'Admin' },
+{ id: 2, userName: 'Sarah Smith', userEmail: 'sarah@example.com', userPermission: 'Editor' },
+{ id: 3, userName: 'Mike Johnson', userEmail: 'mike@example.com', userPermission: 'User' },
+]
 
-  const handleDelete = (id) => {
-    setUsers(users.filter(user => user.id !== id));
-  };
+const EmployeesTable = () => {
 
-  const handleEdit = (id) => {
-    // Add edit logic here
-    console.log('Editing user:', id);
-  };
+  const { data, isError, error, isLoading } = useQuery({
+    queryKey: ['getAllemployees'],
+    queryFn: async () => {
+      const response = await axios.get('http://localhost:3000/employees/get-all-employees');
+      return response.data;
+    },
+  });
 
+  console.log(data)
   return (
-    <div className="w-full overflow-x-auto rounded-lg shadow">
-      <table className="w-full text-left bg-white">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-sm font-medium text-gray-500">Name</th>
-            <th className="px-6 py-3 text-sm font-medium text-gray-500">Email</th>
-            <th className="px-6 py-3 text-sm font-medium text-gray-500">Permission</th>
-            <th className="px-6 py-3 text-sm font-medium text-gray-500">Actions</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-200">
-          {users.map((user) => (
-            <tr key={user.id} className="hover:bg-gray-50">
-              <td className="px-6 py-4 text-sm text-gray-900">{user.name}</td>
-              <td className="px-6 py-4 text-sm text-gray-900">{user.email}</td>
-              <td className="px-6 py-4 text-sm text-gray-900">{user.permission}</td>
-              <td className="px-6 py-4 text-sm">
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => handleEdit(user.id)}
-                    className="text-blue-600 hover:text-blue-800"
-                  >
-                    <Pencil className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(user.id)}
-                    className="text-red-600 hover:text-red-800"
-                  >
-                    <Trash2 className="w-5 h-5" />
-                  </button>
-                </div>
-              </td>
+    <div>
+      <div className="w-full border-2 border-sky-800 ">
+        {isLoading && <div>Loading...</div>}
+        {isError && <div>{error}</div>}
+        <table className="w-full text-left ">
+          <thead className="rounded-lg bg-sky-800 text-center">
+            <tr>
+              <th className="px-6 py-3 text-lg font-medium text-white">Name</th>
+              <th className="px-6 py-3 text-lg font-medium text-white">Email</th>
+              <th className="px-6 py-3 text-lg font-medium text-white">Permission</th>
+              <th className="px-6 py-3 text-lg font-medium text-white">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {data && data.data.map((employee) => <EmployeeRow key={employee._id} {...employee} />)}
+          </tbody>
+        </table>
+      </div>
+
     </div>
   );
 };
 
-export default UsersTable;
+export default EmployeesTable;
