@@ -7,29 +7,30 @@ export const AuthContext = createContext()
 function AuthProvider({ children }) {
 
     const [isAuth, setIsAuth] = useState(false);
+    const [employee, setEmployee] = useState({})
 
     const isToken = async () => {
         try {
-            const { data } = await axios.get('http://localhost:3000/auth/verify-token', {withCredentials: true})
+            const { data } = await axios.get('http://localhost:3000/auth/verify-token', { withCredentials: true })
             setIsAuth(data.success)
-            console.log("DDDDDD", data)
+            setEmployee(data.data.employee)
+            console.log("Data", data.data)
         } catch (error) {
-            console.log("DDDD",error)
+            console.error(error)
         }
-
     }
-
-    const authGloblaState = {
-        isAuth,
-        setIsAuth
-    }
-
 
     useEffect(() => {
         console.log("work on token")
         isToken()
+        
     }, [])
-
+    
+    const authGloblaState = {
+        isAuth,
+        employee,
+        setIsAuth,
+    };
     return (
         <AuthContext.Provider value={authGloblaState}>
             {children}

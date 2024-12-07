@@ -18,7 +18,6 @@ const EmployeesTable = () => {
     },
   });
 
-  console.log(data)
   return (
     <div>
       <div className="w-full border-2 border-sky-800 ">

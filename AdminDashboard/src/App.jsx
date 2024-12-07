@@ -7,22 +7,17 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider,} from '@tanstack/react-query'
 
 import SignIn from './forms/Auth/SignIn/SignIn'
 import SideBar from "./pages/SideBar/SideBar";
 import { useContext } from "react";
-import { AuthContext } from './Contexts/AuthContext';
 import EmployeesSection from "./components/tables/EmployeesSection/EmployeesSection";
 import OrdersSections from "./components/tables/ordersSection/OrdersSections";
 import MealsSection from "./components/tables/MealsSection/MealsSection";
 import UsersSection from "./components/tables/UsersSections/UsersSection";
+import ResetPassword from "./forms/Auth/ResetPassword/ResetPassword";
+import { AuthContext } from './Contexts/AuthContext';
 
 
 function Root({ isAuth }) {
@@ -57,6 +52,7 @@ function App() {
         <Route element={!isAuth ? <Outlet /> : <Navigate to={"/dashboard/employees"} />}>
           <Route index element={<SignIn />} />
           <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
 
 
