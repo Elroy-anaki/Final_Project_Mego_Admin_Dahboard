@@ -19,7 +19,10 @@ import SignIn from './forms/Auth/SignIn/SignIn'
 import SideBar from "./pages/SideBar/SideBar";
 import { useContext } from "react";
 import { AuthContext } from './Contexts/AuthContext';
-import EmployeesSection from "./components/tables/EmployeesTable/EmployeesSection";
+import EmployeesSection from "./components/tables/EmployeesSection/EmployeesSection";
+import OrdersSections from "./components/tables/ordersSection/OrdersSections";
+import MealsSection from "./components/tables/MealsSection/MealsSection";
+import UsersSection from "./components/tables/UsersSections/UsersSection";
 
 
 function Root({ isAuth }) {
@@ -60,6 +63,9 @@ function App() {
         {/* Private Routes */}
         <Route path="/dashboard" element={!isAuth ? <Navigate to={'/'}/> : <Outlet/>}>
         <Route path="employees" element={<EmployeesSection />} />
+        <Route path="orders" element={<OrdersSections />} />
+        <Route path="meals" element={<MealsSection />} />
+        <Route path="users" element={<UsersSection />} />
         </Route>
       </Route>
     )
