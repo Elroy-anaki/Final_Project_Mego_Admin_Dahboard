@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Formik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
-import Input from "./Input";
+import Input from "../Input";
 // import sigUpSchema from "../../../../schemas/signUp.schema";
 import axios from "axios";
 import { AuthContext } from '../../../Contexts/AuthContext'
@@ -111,7 +111,7 @@ function SignUp() {
               <p className="text-gray-800 text-sm mt-6 text-center">
                 Forgot Your Password?
                 <Link
-                  to={"/sign-in"}
+                  to={"/reset-password"}
                   className="text-sky-600 font-semibold hover:underline ml-1"
                 >
                   Reset Here
