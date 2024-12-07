@@ -10,7 +10,7 @@ function AuthProvider({ children }) {
 
     const isToken = async () => {
         try {
-            const { data } = await axios.get('http://localhost:3000/employees/auth', {withCredentials: true})
+            const { data } = await axios.get('http://localhost:3000/auth/verify-token', {withCredentials: true})
             setIsAuth(data.success)
             console.log("DDDDDD", data)
         } catch (error) {
