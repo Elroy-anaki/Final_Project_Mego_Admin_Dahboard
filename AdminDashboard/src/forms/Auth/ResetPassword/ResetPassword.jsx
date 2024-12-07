@@ -10,11 +10,11 @@ function ResetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { email, newPassword } = e.target;
-    try{
+    try {
       const { data } = await axios.post('http://localhost:3000/auth/reset-password', { email: email.value, password: newPassword.value, premission: 'employee' })
       data.success && navigate('/sign-in');
-      
-    } catch(error){
+
+    } catch (error) {
       console.error(error)
     }
 
