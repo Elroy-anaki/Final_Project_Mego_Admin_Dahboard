@@ -27,6 +27,7 @@ function SignUp() {
         console.log(error)
     }
   };
+
   return (
     <div className="font-[sans-serif] bg-white max-w-4xl flex items-center justify-center items mx-auto rounded-lg h-screen">
       <div className="grid grid- md:grid-cols-3 items-center shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-xl overflow-hidden ">
@@ -111,7 +112,7 @@ function SignUp() {
               <p className="text-gray-800 text-sm mt-6 text-center">
                 Forgot Your Password?
                 <Link
-                  to={"/reset-password"}
+                  to={"/forgot-password"}
                   className="text-sky-600 font-semibold hover:underline ml-1"
                 >
                   Reset Here

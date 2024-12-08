@@ -1,17 +1,20 @@
 import React from 'react';
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import axios from 'axios';
 
 //TODO check how to update the user for the dashboard
 
 function ResetPassword() {
   const navigate = useNavigate();
-
+  const queryParams = new URLSearchParams(window.location.search)
+  
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { email, newPassword } = e.target;
+    const { newPassword } = e.target;
+    const userId = queryParams.get("userId")
+    const forgotPasswordId = queryParams.get("forgotPasswordId")
     try {
-      const { data } = await axios.post('http://localhost:3000/auth/reset-password', { email: email.value, password: newPassword.value, premission: 'employee' })
+      const { data } = await axios.post(`http://localhost:3000/auth/reset-password?userId=${userId}&forgotPasswordId=${forgotPasswordId}`, {  password: newPassword.value, premission: 'employee' })
       data.success && navigate('/sign-in');
 
     } catch (error) {
@@ -31,10 +34,7 @@ function ResetPassword() {
             onSubmit={handleSubmit}
 
             className="mt-4 space-y-4 lg:mt-5 md:space-y-5">
-            <div>
-              <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-700">Your email</label>
-              <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required />
-            </div>
+            
             <div>
               <label htmlFor="newPassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-700">New Password</label>
               <input type="text" name="password" id="newPassword" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500" required />

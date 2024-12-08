@@ -18,6 +18,7 @@ import MealsSection from "./components/tables/MealsSection/MealsSection";
 import UsersSection from "./components/tables/UsersSections/UsersSection";
 import ResetPassword from "./forms/Auth/ResetPassword/ResetPassword";
 import { AuthContext } from './Contexts/AuthContext';
+import ForgotPassword from "./forms/Auth/ForgotPassword";
 
 
 function Root({ isAuth }) {
@@ -52,6 +53,7 @@ function App() {
         <Route element={!isAuth ? <Outlet /> : <Navigate to={"/dashboard/employees"} />}>
           <Route index element={<SignIn />} />
           <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
 
