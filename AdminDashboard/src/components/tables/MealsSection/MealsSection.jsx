@@ -11,9 +11,14 @@ function MealSection() {
       <div className='mt-20'>
         <MealTable />
       </div>
-      <div className='mt-7'>
-        <AddButton text='Add Meal +' />
+      <div 
+      onClick={()=>document.getElementById('mealModal').showModal()}
+      className='mt-7'>
+        <AddButton 
+        text='Add Meal +' />
       </div>
+      
+
     </div>
   )
 }
