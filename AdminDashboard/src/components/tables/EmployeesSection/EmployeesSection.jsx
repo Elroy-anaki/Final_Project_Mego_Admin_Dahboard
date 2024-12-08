@@ -7,7 +7,7 @@ import { AddButton } from '../../common/Buttons/addButtons';
 
 function EmployeesSection() {
     return (
-        <div>
+        <div className='w-[75%]'>
             <div>
                 <h1 className='text-5xl text-slate-600 text-center mx-auto mt-5'>Employees</h1>
             </div>

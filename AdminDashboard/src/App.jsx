@@ -24,14 +24,14 @@ function Root({ isAuth }) {
   return (
     <>
       <div className="flex w-11/12 mx-auto">
-        <div className="w-1/5">
-          {isAuth && <SideBar />}
+        
+          {isAuth && <div className="w-1/5"><SideBar />   </div>}
 
-        </div>
-        <div className="w-4/5">
+     
+        {/* <div className="w-4/5"> */}
 
           <Outlet />
-        </div>
+        {/* </div> */}
 
       </div>
     </>
