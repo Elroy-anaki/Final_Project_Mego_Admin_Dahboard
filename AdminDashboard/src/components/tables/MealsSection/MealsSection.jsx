@@ -1,8 +1,10 @@
 import React from 'react'
 import MealTable from './MealTable'
 import { AddButton } from '../../common/Buttons/addButtons'
-
+import { useQuery } from '@tanstack/react-query'
+import axios from 'axios'
 function MealSection() {
+
   return (
     <div className='w-[75%]'>
       <div>
