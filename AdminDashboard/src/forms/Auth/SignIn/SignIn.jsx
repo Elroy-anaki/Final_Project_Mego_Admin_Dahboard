@@ -14,8 +14,7 @@ const initialEmployeeValues = {
 };
 
 function SignUp() {
-  const { setIsAuth,setEmployee } = useContext(AuthContext)
-  const navigate = useNavigate()
+
 
   const sendToServer = async (newEmployeeData) => {
     try {
