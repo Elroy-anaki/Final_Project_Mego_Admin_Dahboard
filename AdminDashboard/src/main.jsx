@@ -7,12 +7,12 @@ import MealModal from './components/tables/MealsSection/Modal/MealModal.jsx'
 const queryClient = new QueryClient()
 
 import AuthProvider from './Contexts/AuthContext.jsx'
+import AddEmployee from './modals/employeeModal/addEmployee.jsx'
 
 createRoot(document.getElementById('root')).render(
   
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <MealModal/>
       <App />
     </AuthProvider>
     </QueryClientProvider>

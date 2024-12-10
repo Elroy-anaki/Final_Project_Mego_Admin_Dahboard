@@ -13,8 +13,8 @@ const initialEmployeeValues = {
   employeePassword: "",
 };
 
-function SignUp() {
 
+function SignIn() {
   const { setIsAuth,setEmployee } = useContext(AuthContext)
 
   const sendToServer = async (newEmployeeData) => {
@@ -127,4 +127,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignIn;
