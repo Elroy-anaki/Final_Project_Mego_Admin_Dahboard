@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa6";
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { notifySuccess } from '../../../lib/Toasts/Toasts';
 
 
 function MealRow({ _id, mealName, mealPrice, mealImage, ingredients, reviews }) {
@@ -13,14 +14,18 @@ function MealRow({ _id, mealName, mealPrice, mealImage, ingredients, reviews }) 
     const { mutate: deleteMeal } = useMutation({
         mutationKey: ['deleteMealById'],
         mutationFn: async (_id) => {
-            const { data } = await axios.delete(`http://localhost:3000/meals/delete-meal-by-id/${_id}`);
+            const { data } = await axios.delete(`/meals/delete-meal-by-id/${_id}`);
+            console.log("M",data.msg);
             return data;
         },
-        onSuccess: async () => {
+        onSuccess: async (data) => {
             await queryClient.invalidateQueries({ queryKey: ['getAllMeals'] })
+            console.log("os",data);
+            console.log(data.msg)
+            alert("End  ")
 
         },
-        onError: (data) => { }
+        onError: (data) => { console.log(data)}
     })
 
     const {mutate:getReviewsByMealId} = useMutation({
@@ -28,7 +33,6 @@ function MealRow({ _id, mealName, mealPrice, mealImage, ingredients, reviews }) 
         mutationFn: async (_id) => {
             const { data } = await axios.get(`http://localhost:3000/meals/get-all-reviews-by-id/${_id}`)
             console.log(data);
-            
         }
 
     })

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import Category from '../../../common/Category/Category';
+import { notifySuccess } from '../../../../lib/Toasts/Toasts';
 
 
 function MealModalForm() {
@@ -14,10 +15,11 @@ function MealModalForm() {
     const { data: data } = useQuery({
         queryKey: ['getAllCaterogies'],
         queryFn: async () => {
-            const { data } = await axios.get('http://localhost:3000/meals-categories/get-all-meal-categories')
+            const { data } = await axios.get('/meals-categories/get-all-meal-categories')
             console.log(data)
             return data
-        }
+        },
+        staleTime: 1000 * 60
     }
     )
 
@@ -25,13 +27,13 @@ function MealModalForm() {
         mutationKey: ['addNewMeal'],
         mutationFn: async (meal) => {
             console.log("Work");
-            const { data } = await axios.post('http://localhost:3000/meals/add-meal', meal, { withCredentials: true })
+            const { data } = await axios.post('/meals/add-meal', meal, { withCredentials: true })
             console.log(data)
             return data
         },
         onSuccess: async (data) => {
             queryClient.invalidateQueries({ queryKey: ['getAllMeals'] })
-            alert(data.msg)
+            notifySuccess(data.msg)
         },
         onError: async (data) => {
             alert(data.msg)
@@ -50,20 +52,13 @@ function MealModalForm() {
 
     const handelSubmit = async (e) => {
         e.preventDefault();
-        const filteredCategories = categories.map((category) => category._id)
-        console.log("filteredCategories", filteredCategories)
-        // return;
-        alert("send")
         const mealDetails = new FormData(e.currentTarget);
         mealDetails.set('ingredients', ingredients);
-        mealDetails.set('mealCategory', JSON.stringify(filteredCategories));
+        mealDetails.set('mealCategory', JSON.stringify(categories.map((category) => category._id)))
         addMeal(mealDetails)
         document.getElementById('mealModal').close()
         document.getElementById("mealModalForm").reset();
     };
-    useEffect(() => {
-        console.log(categories)
-    }, [categories])
 
     return (
         <div>

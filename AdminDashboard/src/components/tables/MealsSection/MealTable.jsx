@@ -6,11 +6,11 @@ import MealRow from './MealRow';
 
 
 const MealTable = () => {
-
+  
     const { data, isError, error, isLoading } = useQuery({
         queryKey: ['getAllMeals'],
         queryFn: async () => {
-            const { data } = await axios.get('http://localhost:3000/meals/get-all-meals')
+            const { data } = await axios.get('/meals/get-all-meals')
             return data;
         },
     })
