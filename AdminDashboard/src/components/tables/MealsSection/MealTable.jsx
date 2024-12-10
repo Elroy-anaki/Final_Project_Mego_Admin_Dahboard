@@ -30,7 +30,7 @@ const MealTable = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {data && data.data.map((meal) => <MealRow key={meal._id} {...meal} />)}
+            {data && data.data.map((meal) => <MealRow key={meal._id} Meal={meal} />)}
           </tbody>
         </table>
       </div>

@@ -10,9 +10,14 @@ function MealProvider({children}) {
     useEffect(() => {
         setMeal(null)
     }, []);
+    
+    useEffect(() => {
+        console.log("useEffect", meal)
+    }, [meal])
 
     const mealGlobalState = {
-        meal
+        meal,
+        setMeal
     }
 
     return (
