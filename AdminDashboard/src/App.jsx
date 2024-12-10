@@ -7,7 +7,6 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import { QueryClient, QueryClientProvider,} from '@tanstack/react-query'
 
 import SignIn from './forms/Auth/SignIn/SignIn'
 import SideBar from "./pages/SideBar/SideBar";
@@ -41,7 +40,6 @@ function Root({ isAuth }) {
   );
 }
 
-const queryClient = new QueryClient()
 
 function App() {
   const { isAuth } = useContext(AuthContext);
@@ -73,9 +71,7 @@ function App() {
 
   return (
     <div>
-      <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
-      </QueryClientProvider>
     </div>
   );
 }

@@ -14,7 +14,7 @@ import {AuthContext} from '../../Contexts/AuthContext'
 
 
 function SideBar() {
-  const {employee} = useContext(AuthContext);
+  const {employee,singOut} = useContext(AuthContext);
 
   return (
     <div>
@@ -32,7 +32,7 @@ function SideBar() {
               <Link to="/sign-in" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                 <span><CgProfile size={20} /></span>
-                <span className="ms-3 text-lg ">Hi, {employee.employeeName}</span>
+                <span className="ms-3 text-lg ">Hi</span>
               </Link>
             </li>
             <li>
@@ -67,7 +67,7 @@ function SideBar() {
               </Link>
             </li>
             <li >
-              <Link onClick={()=> alert("NO")} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <Link onClick={singOut} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <span className='text-red-600'><GoSignOut size={20} /></span>
                 <span className="flex-1 ms-3 whitespace-nowrap text-red-600">Sign Out</span>
               </Link>

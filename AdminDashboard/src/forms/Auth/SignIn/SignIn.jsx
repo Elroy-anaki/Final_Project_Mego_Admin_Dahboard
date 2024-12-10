@@ -13,14 +13,15 @@ const initialEmployeeValues = {
   employeePassword: "",
 };
 
+
 function SignIn() {
-  const { setIsAuth } = useContext(AuthContext)
-  const navigate = useNavigate()
+  const { setIsAuth,setEmployee } = useContext(AuthContext)
 
   const sendToServer = async (newEmployeeData) => {
     try {
         const { data } = await axios.post(`http://localhost:3000/employees/sign-in`, newEmployeeData, {withCredentials: true})
-        console.log(data)
+        console.log("nnnnnnnnnnnnn",data.data);
+        setEmployee(data.data)
         setIsAuth(true)
         
     } catch (error) {
