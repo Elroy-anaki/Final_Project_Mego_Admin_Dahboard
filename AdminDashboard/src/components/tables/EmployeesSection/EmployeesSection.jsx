@@ -1,6 +1,7 @@
 import React from 'react';
 import EmployeesTable from './EmployeesTable';
 import { AddButton } from '../../common/Buttons/addButtons';
+import AddEmployeeForm from '../../../modals/employeeModal/AddEmployeeForm';
 
 
 
@@ -15,7 +16,9 @@ function EmployeesSection() {
             <EmployeesTable />
             </div>
             <div className='mt-7'>
-        <AddButton text='Add Employee +' />
+        <AddButton text='Add Employee +' 
+        functionHandler={() => document.getElementById('addEmployeeModal').showModal()}/>
+        
       </div>
         </div>
     )

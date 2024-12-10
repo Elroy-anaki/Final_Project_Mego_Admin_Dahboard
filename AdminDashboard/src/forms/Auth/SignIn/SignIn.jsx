@@ -13,7 +13,7 @@ const initialEmployeeValues = {
   employeePassword: "",
 };
 
-function SignUp() {
+function SignIn() {
   const { setIsAuth } = useContext(AuthContext)
   const navigate = useNavigate()
 
@@ -126,4 +126,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignIn;

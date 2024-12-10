@@ -19,6 +19,7 @@ import UsersSection from "./components/tables/UsersSections/UsersSection";
 import ResetPassword from "./forms/Auth/ResetPassword/ResetPassword";
 import { AuthContext } from './Contexts/AuthContext';
 import ForgotPassword from "./forms/Auth/ForgotPassword";
+import AddEmployee from "./modals/employeeModal/addEmployee";
 
 
 function Root({ isAuth }) {
@@ -32,6 +33,7 @@ function Root({ isAuth }) {
         {/* <div className="w-4/5"> */}
 
           <Outlet />
+        
         {/* </div> */}
 
       </div>
