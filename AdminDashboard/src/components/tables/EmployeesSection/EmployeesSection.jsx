@@ -1,7 +1,6 @@
 import React from 'react';
 import EmployeesTable from './EmployeesTable';
 import { AddButton } from '../../common/Buttons/addButtons';
-import AddEmployeeForm from '../../../modals/employeeModal/AddEmployeeForm';
 
 
 

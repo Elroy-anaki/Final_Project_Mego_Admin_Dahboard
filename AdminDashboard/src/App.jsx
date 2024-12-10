@@ -17,8 +17,7 @@ import MealsSection from "./components/tables/MealsSection/MealsSection";
 import UsersSection from "./components/tables/UsersSections/UsersSection";
 import ResetPassword from "./forms/Auth/ResetPassword/ResetPassword";
 import { AuthContext } from './Contexts/AuthContext';
-import ForgotPassword from "./forms/Auth/ForgotPassword";
-import AddEmployee from "./modals/employeeModal/addEmployee";
+import ForgotPassword from "./forms/Auth/ForgotPassword/ForgotPassword";
 
 
 function Root({ isAuth }) {

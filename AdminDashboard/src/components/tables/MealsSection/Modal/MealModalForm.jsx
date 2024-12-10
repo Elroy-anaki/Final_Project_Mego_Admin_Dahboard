@@ -51,12 +51,19 @@ function MealModalForm() {
     const handelSubmit = async (e) => {
         e.preventDefault();
         const filteredCategories = categories.map((category) => category._id)
+        console.log("filteredCategories", filteredCategories)
+        // return;
+        alert("send")
         const mealDetails = new FormData(e.currentTarget);
         mealDetails.set('ingredients', ingredients);
-        mealDetails.append('categories', filteredCategories);
+        mealDetails.set('mealCategory', JSON.stringify(filteredCategories));
         addMeal(mealDetails)
         document.getElementById('mealModal').close()
+        document.getElementById("mealModalForm").reset();
     };
+    useEffect(() => {
+        console.log(categories)
+    }, [categories])
 
     return (
         <div>
@@ -109,12 +116,12 @@ function MealModalForm() {
                     />
                 </div>
                 <div className='space-y-1'>
-                    <label htmlFor="categories">Choose Category</label>
+                    <label htmlFor="mealCategory">Choose Category</label>
                     <select
                         onChange={handelChangeCategories}
                         className="text-gray-800 bg-gray-100 border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
-                        name="categories"
-                        id="categories"
+                        name="mealCategory"
+                        id="mealCategory"
                     >
                         {data && data?.data.map((category) => <option value={category._id}>{category.mealCategoriesName}</option>)}
                     </select>

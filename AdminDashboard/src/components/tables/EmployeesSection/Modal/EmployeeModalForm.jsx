@@ -5,8 +5,8 @@ import Select from "./Select";
 import axios from "axios";
 
 const validationSchema = Yup.object({
-    employeeEmail: Yup.string().email("Invalid email address").required("must"),
-    employeePassword: Yup.string()
+  employeeEmail: Yup.string().email("Invalid email address").required("must"),
+  employeePassword: Yup.string()
     .min(5, "Must have at least 5 characters")
     .required("must"),
 });
@@ -17,12 +17,9 @@ const initialValues = {
   employeePassword: "",
   premission: "",
 };
-const onSubmit = (values) => {
-  console.log("Form data:", values);
-  
-};
 
-export default function AddEmployeeForm() {
+function EmployeeModalForm() {
+
   const sendToServer = async (newEmployeeData) => {
     try {
       const { data } = await axios.post(
@@ -48,7 +45,7 @@ export default function AddEmployeeForm() {
         document.getElementById('addEmployeeModal').close()
       }}
     >
-      {({ values, handleChange, handleBlur, errors, touched , isSubmitting }) => (
+      {({ values, handleChange, handleBlur, errors, touched, isSubmitting }) => (
         <div className=" bg-gray-50 flex items-center justify-center">
           <div className="w-full max-w-2xl bg-white  overflow-hidden">
             <div className="p-4">
@@ -56,10 +53,7 @@ export default function AddEmployeeForm() {
                 <h1 className="text-2xl font-bold mb-8 text-gray-800">
                   Add New User 😊
                 </h1>
-
-                <Form
-                id="addEmployeeForm"
-                >
+                <Form id="addEmployeeForm">
                   <div>
                     <label className="block text-gray-700 mb-2" htmlFor="name">
                       Full Name
@@ -125,7 +119,7 @@ export default function AddEmployeeForm() {
                   </div>
                   <div >
                     <Select onChange={handleChange} />
-                    
+
                     {touched.employeePremission && errors.employeePremission ? (
                       <div className="text-red-500 text-sm mt-1">
                         {errors.employeePremission}
@@ -138,7 +132,7 @@ export default function AddEmployeeForm() {
                       className="w-full py-3 px-4 tracking-wider text-lg rounded-md text-white font-semibold  bg-gradient-to-r from-sky-900 via-sky-800 to-sky-900 hover:bg-gray-800 focus:outline-none"
                       disabled={isSubmitting}
                     >
-                     {isSubmitting ? "inProccess..." : "Add Employee"} 
+                      {isSubmitting ? "inProccess..." : "Add Employee"}
                     </button>
                   </div>
                 </Form>
@@ -150,3 +144,5 @@ export default function AddEmployeeForm() {
     </Formik>
   );
 }
+
+export default EmployeeModalForm

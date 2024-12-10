@@ -1,10 +1,7 @@
 import React from "react";
-import daisyui from "daisyui";
-import AddEmployeeForm from "./AddEmployeeForm";
-import SignIn from "../../forms/Auth/SignIn/SignIn";
+import EmployeeModalForm from "./EmployeeModalForm";
 
-export default function AddEmployee() {
-  // שם הפונקציה צריך להתחיל באות גדולה
+function EmployeeModal() {
   return (
     <>
       <dialog id="addEmployeeModal" className="modal w-[35%] py-10  rounded-xl">
@@ -22,9 +19,11 @@ export default function AddEmployee() {
               ✕
             </button>
           </form>
-          <AddEmployeeForm />
+          <EmployeeModalForm />
         </div>
       </dialog>
     </>
   );
 }
+
+export default EmployeeModal;
