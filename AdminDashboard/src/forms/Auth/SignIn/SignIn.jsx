@@ -5,6 +5,7 @@ import Input from "../Input";
 // import sigUpSchema from "../../../../schemas/signUp.schema";
 import axios from "axios";
 import { AuthContext } from '../../../Contexts/AuthContext'
+import { notifySuccess } from "../../../lib/Toasts/Toasts";
 
 
 
@@ -20,9 +21,10 @@ function SignIn() {
   const sendToServer = async (newEmployeeData) => {
     try {
         const { data } = await axios.post(`http://localhost:3000/employees/sign-in`, newEmployeeData, {withCredentials: true})
-        console.log("nnnnnnnnnnnnn",data.data);
         setEmployee(data.data)
         setIsAuth(true)
+        console.log(data)
+        notifySuccess(`Welcome Back, ${data.data.employeeName}`)
         
     } catch (error) {
         console.log(error)
@@ -31,7 +33,8 @@ function SignIn() {
 
   return (
     <div className="font-[sans-serif] bg-white max-w-4xl flex items-center justify-center items mx-auto rounded-lg h-screen">
-      <div className="grid grid- md:grid-cols-3 items-center shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-xl overflow-hidden ">
+      <h1 className="absolute top-8 text-5xl">KitchenAI</h1>
+      <div className="grid grid- md:grid-cols-3 items-center shadow-2xl rounded-xl overflow-hidden ">
         <div className="max-md:order-1 flex flex-col justify-center space-y-16 max-md:mt-16 min-h-full bg-gradient-to-r from-sky-950 to-sky-800 lg:px-8 px-4 py-4">
           <div>
             <h4 className="text-white text-center text-3xl font-semibold">
@@ -48,10 +51,7 @@ function SignIn() {
           // validationSchema={sigUpSchema}
           onSubmit={ async (values, actions) => {
             console.log(values);
-            alert("yes")
-
             await sendToServer(values)
-            // actions.resetForm();
           }}
         >
           {({
@@ -67,7 +67,7 @@ function SignIn() {
               onSubmit={handleSubmit}
               className="md:col-span-2 w-full py-6 px-6 sm:px-16"
             >
-              <div className="mb-6">
+              <div className="mb-6 ">
                 <h3 className="text-gray-800 text-2xl font-bold">
                   Hi Employee, Sign In Please 😀
                 </h3>
@@ -104,13 +104,13 @@ function SignIn() {
               <div className="!mt-12">
                 <button
                   type="submit"
-                  className="w-full py-3 px-4 tracking-wider text-lg rounded-md text-white font-semibold  bg-gradient-to-r from-sky-900 via-sky-800 to-sky-900 hover:bg-gray-800 focus:outline-none"
+                  className="w-full bg-sky-900 text-white text-lg py-3 rounded-lg hover:bg-sky-800 transition duration-300 ease-in-out transform hover:scale-[1.02] shadow-md"
                   disabled={isSubmitting}
                 >
                   Sign In
                 </button>
               </div>
-              <p className="text-gray-800 text-sm mt-6 text-center">
+              <p className="text-gray-500 text-sm mt-6 text-center">
                 Forgot Your Password?
                 <Link
                   to={"/forgot-password"}

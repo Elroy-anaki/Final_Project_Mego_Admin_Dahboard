@@ -1,8 +1,8 @@
 import React from 'react'
 import MealTable from './MealTable'
 import { AddButton } from '../../common/Buttons/addButtons'
-import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
+
+
 function MealSection() {
 
   return (
@@ -13,16 +13,14 @@ function MealSection() {
       <div className='mt-20'>
         <MealTable />
       </div>
-      <div 
-      onClick={()=>document.getElementById('mealModal').showModal()}
-      className='mt-7'>
-        <AddButton 
-        text='Add Meal +' />
+      <div
+        onClick={() => document.getElementById('mealModal').showModal()}
+        className='mt-7'>
+        <AddButton
+          text='Add Meal +' />
       </div>
-      
-
     </div>
   )
-}
+};
 
 export default MealSection

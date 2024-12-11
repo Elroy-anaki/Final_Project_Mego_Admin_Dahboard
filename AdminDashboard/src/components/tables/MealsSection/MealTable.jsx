@@ -6,13 +6,16 @@ import MealRow from './MealRow';
 
 
 const MealTable = () => {
-
+  
     const { data, isError, error, isLoading } = useQuery({
         queryKey: ['getAllMeals'],
         queryFn: async () => {
-            const { data } = await axios.get('http://localhost:3000/meals/get-all-meals')
+            const { data } = await axios.get('/meals/get-all-meals')
+            console.log("mealss", data);
+            
             return data;
         },
+        staleTime: 1000 * 6
     })
     return (
         <div>
@@ -30,7 +33,7 @@ const MealTable = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {data && data.data.map((meal) => <MealRow key={meal._id} {...meal} />)}
+            {data && data.data.map((meal) => <MealRow key={meal._id} Meal={meal} />)}
           </tbody>
         </table>
       </div>

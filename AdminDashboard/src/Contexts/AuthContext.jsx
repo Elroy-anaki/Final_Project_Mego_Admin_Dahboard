@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import { notifySuccess } from "../lib/Toasts/Toasts";
 
 
 export const AuthContext = createContext()
@@ -11,7 +12,7 @@ function AuthProvider({ children }) {
 
     const isToken = async () => {
         try {
-            const { data } = await axios.get('http://localhost:3000/auth/verify-token', { withCredentials: true })
+            const { data } = await axios.get('/auth/verify-token')
             setIsAuth(data.success)
             setEmployee(data.data.data)
             console.log("Data", data.data)
@@ -31,7 +32,7 @@ function AuthProvider({ children }) {
             const response = await axios.get('http://localhost:3000/auth/log-Out',{ withCredentials: true });
     
             if (response.status === 200) {
-              alert(`${employee.employeeName} logged out successfully!`  );
+              notifySuccess(`${employee.employeeName} logged out successfully!`  );
               setIsAuth(false);
               setEmployee({});
             } else {
