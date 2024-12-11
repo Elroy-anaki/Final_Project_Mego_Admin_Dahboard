@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Pencil, Trash2 } from 'lucide-react';
 import {useMutation, useQueryClient} from '@tanstack/react-query'
 import axios from 'axios';
 import { notifySuccess } from '../../../lib/Toasts/Toasts';
+import { EmployeeContext } from '../../../Contexts/EmployeeContext';
 
 
-function EmployeeRow({ _id, employeeName, employeeEmail, premission }) {
+function EmployeeRow({ Employee }) {
     const queryClient = useQueryClient()
+    // const {employee, setEmployee} = useContext(EmployeeContext)
 
     const {mutate: deleteEmployee} = useMutation({
         mutationKey:['deleteEmployeeById'],
         mutationFn: async () => {
             try {
-                const { data } = await axios.delete(`/employees/delete-employee-by-id/${_id}`, {withCredentials: true})
+                const { data } = await axios.delete(`/employees/delete-employee-by-id/${Employee._id}`)
                 console.log(data)
                 return data
             } catch (error) {
@@ -31,13 +33,16 @@ function EmployeeRow({ _id, employeeName, employeeEmail, premission }) {
 
 
     return (
-        <tr key={_id} className="hover:bg-sky-100">
-            <td className="px-6 py-4 text-sm text-gray-900 text-center">{employeeName}</td>
-            <td className="px-6 py-4 text-sm text-gray-900 text-center">{employeeEmail}</td>
-            <td className="px-6 py-4 text-sm text-gray-900 text-center">{premission}</td>
+        <tr key={Employee._id} className="hover:bg-sky-100">
+            <td className="px-6 py-4 text-sm text-gray-900 text-center">{Employee.employeeName}</td>
+            <td className="px-6 py-4 text-sm text-gray-900 text-center">{Employee.employeeEmail}</td>
+            <td className="px-6 py-4 text-sm text-gray-900 text-center">{Employee.premission}</td>
             <td className="px-6 py-4 text-sm text-center ">
                 <div className="inline-flex gap-3">
                     <button
+                    onClick={() => {
+                        // setEmployee()
+                        document.getElementById('addEmployeeModal').showModal()}}
                         className="text-blue-600 hover:text-blue-800"
                     >
                         <Pencil className="w-5 h-5" />

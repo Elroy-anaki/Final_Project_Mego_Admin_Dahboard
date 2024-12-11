@@ -33,7 +33,7 @@ const EmployeesTable = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {data && data.data.map((employee) => <EmployeeRow key={employee._id} {...employee} />)}
+            {data && data.data.map((employee) => <EmployeeRow key={employee._id} Employee={employee} />)}
           </tbody>
         </table>
       </div>

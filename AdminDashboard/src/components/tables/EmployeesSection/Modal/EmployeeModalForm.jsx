@@ -51,7 +51,7 @@ function EmployeeModalForm() {
             <div className="p-4">
               <div className="max-w-md mx-auto">
                 <h1 className="text-2xl font-bold mb-8 text-gray-800">
-                  Add New User 😊
+                  Add New Employee
                 </h1>
                 <Form id="addEmployeeForm">
                   <div>

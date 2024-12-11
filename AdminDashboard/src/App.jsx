@@ -43,6 +43,7 @@ function Root({ isAuth }) {
 function App() {
   const { isAuth, employee  } = useContext(AuthContext);
   console.log(isAuth);
+  console.log(employee);
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -59,7 +60,7 @@ function App() {
 
         {/* Private Routes */}
         <Route path="/dashboard" element={!isAuth ? <Navigate to={'/'}/> : <Outlet/>}>
-        <Route path="employees" element={employee.premission === 'admin'? <EmployeesSection />: <Navigate to={'/dashboard/meals'}/>} />
+        <Route path="employees" element={employee?.premission === 'admin'? <EmployeesSection />: <Navigate to={'/dashboard/meals'}/>} />
         <Route path="orders" element={<OrdersSections />} />
         <Route path="meals" element={<MealsSection />} />
         <Route path="users" element={<UsersSection />} />
