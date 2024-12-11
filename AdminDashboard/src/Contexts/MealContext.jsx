@@ -6,6 +6,7 @@ export const MealContext = createContext();
 function MealProvider({children}) {
 
     const [meal, setMeal] = useState(null)
+    const [categories, setCategories] = useState([])
 
     useEffect(() => {
         setMeal(null)
@@ -13,11 +14,14 @@ function MealProvider({children}) {
     
     useEffect(() => {
         console.log("useEffect", meal)
+        setCategories(meal?.mealCategories || [])
     }, [meal])
 
     const mealGlobalState = {
         meal,
-        setMeal
+        categories,
+        setMeal,
+        setCategories
     }
 
     return (

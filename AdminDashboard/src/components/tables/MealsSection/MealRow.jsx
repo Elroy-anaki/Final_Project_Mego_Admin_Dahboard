@@ -1,15 +1,13 @@
 import React, { useContext } from 'react'
 import { Pencil, Trash2 } from 'lucide-react';
 import { FaEye } from "react-icons/fa6";
-
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { notifySuccess } from '../../../lib/Toasts/Toasts';
 import { MealContext } from '../../../Contexts/MealContext'
 
 
 function MealRow( {Meal} ) {
-    const { meal, setMeal } = useContext(MealContext);
+    const { setMeal } = useContext(MealContext);
 
     const queryClient = useQueryClient();
 
@@ -57,7 +55,7 @@ function MealRow( {Meal} ) {
                     <button
                         onClick={() => {
                             alert("get");
-                            getMeal.reviewsByMealId(Meal._id);
+                            // getMeal.reviewsByMealId(Meal._id);
                         }}
                         className="text-purple-600 hover:text-purple-800"
                     >
