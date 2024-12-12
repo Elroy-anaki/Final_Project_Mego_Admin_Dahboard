@@ -13,7 +13,7 @@ const EmployeesTable = () => {
   const { data, isError, error, isLoading } = useQuery({
     queryKey: ['getAllemployees'],
     queryFn: async () => {
-      const response = await axios.get('http://localhost:3000/employees/get-all-employees');
+      const response = await axios.get('/employees/get-all-employees');
       return response.data;
     },
   });

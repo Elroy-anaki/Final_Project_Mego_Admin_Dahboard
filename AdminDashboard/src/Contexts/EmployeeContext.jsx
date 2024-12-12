@@ -9,6 +9,10 @@ function EmployeeProvider ({children}){
     useEffect(() => {
         setEmployee(null)
     }, []);
+    useEffect(() => {
+        console.log(employee)
+    }, 
+    [employee])
 
 
     const employeeGloblaState = {

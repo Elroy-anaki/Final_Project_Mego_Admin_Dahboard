@@ -41,7 +41,7 @@ function MealModalForm() {
     )
 
     const { mutate: addOrEditMeal } = useMutation({
-        mutationKey: ['addNewMeal'],
+        mutationKey: ['addOEditMeal'],
         mutationFn: async (mealDetails) => {
             const { data } = await axios({
                 method: meal ? "PUT" : "POST",

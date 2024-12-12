@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import Select from "./Select";
 import axios from "axios";
+import { EmployeeContext } from "../../../../Contexts/EmployeeContext";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const validationSchema = Yup.object({
   employeeEmail: Yup.string().email("Invalid email address").required("must"),
@@ -19,28 +21,63 @@ const initialValues = {
 };
 
 function EmployeeModalForm() {
+  const queryClient = useQueryClient()
 
-  const sendToServer = async (newEmployeeData) => {
-    try {
-      const { data } = await axios.post(
-        `http://localhost:3000/employees/add-employee`,
-        newEmployeeData,
-        { withCredentials: true }
-      );
-      console.log(data);
-    } catch (error) {
-      console.log(error);
+  const { employee } = useContext(EmployeeContext);
+  const [employeeValues, setValues] = useState(initialValues)
+
+  useEffect(() => {
+    if (employee) {
+      setValues({
+        employeeName: employee.employeeName,
+        employeeEmail: employee.employeeEmail,
+        employeePassword: "***********",
+        premission: employee.premission,
+      })
+    } else {setValues(initialValues)}
+      console.log("values", employeeValues)
+  }, [employee])
+
+  const { mutate: addOrEditEmployee } = useMutation({
+    mutationKey:['addOrEditEmployee'],
+    mutationFn: async (employeeDetails) => {
+      const { data } = await axios({
+        method: employee ? "PUT" : "POST",
+        data: employeeDetails,
+        url: employee ? `/employees/edit-employee-by-id/${employee._id}` : '/employees/add-employee'
+      })
+      console.log(data)
+      return data
+    },
+    onSuccess: async (data) =>{
+      await queryClient.invalidateQueries({queryKey: ['getAllemployees']})
+      console.log(data)
+
     }
-  };
+  })
+
+
+  // const sendToServer = async (newEmployeeData) => {
+  //   try {
+  //     const { data } = await axios.post(
+  //       `/employees/add-employee`,
+  //       newEmployeeData,
+  //     );
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={employeeValues}
       validationSchema={validationSchema}
+      enableReinitialize
       onSubmit={async (values, actions) => {
         console.log(values);
         alert("yes");
-        await sendToServer(values);
+        addOrEditEmployee(values);
         actions.resetForm()
         document.getElementById('addEmployeeModal').close()
       }}
@@ -51,7 +88,7 @@ function EmployeeModalForm() {
             <div className="p-4">
               <div className="max-w-md mx-auto">
                 <h1 className="text-2xl font-bold mb-8 text-gray-800">
-                  Add New Employee
+                  {employee ? "Edit Employee" : "Add New Employee"}
                 </h1>
                 <Form id="addEmployeeForm">
                   <div>
@@ -64,7 +101,7 @@ function EmployeeModalForm() {
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Enter full name"
                       name="employeeName"
-                      value={values.employeeName}
+                      value={values?.employeeName}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
@@ -84,7 +121,7 @@ function EmployeeModalForm() {
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Enter Email"
                       name="employeeEmail"
-                      value={values.employeeEmail}
+                      value={values?.employeeEmail}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
@@ -107,9 +144,10 @@ function EmployeeModalForm() {
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Enter password"
                       name="employeePassword"
-                      value={values.employeePassword}
+                      value={values?.employeePassword}
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      disabled={employee ? true : false}
                     />
                     {touched.employeePassword && errors.employeePassword ? (
                       <div className="text-red-500 text-sm mt-1">
@@ -118,7 +156,9 @@ function EmployeeModalForm() {
                     ) : null}
                   </div>
                   <div >
-                    <Select onChange={handleChange} />
+                    <Select
+                    value={values?.premission}
+                     onChange={handleChange} />
 
                     {touched.employeePremission && errors.employeePremission ? (
                       <div className="text-red-500 text-sm mt-1">
@@ -132,7 +172,7 @@ function EmployeeModalForm() {
                       className="w-full py-3 px-4 tracking-wider text-lg rounded-md text-white font-semibold  bg-gradient-to-r from-sky-900 via-sky-800 to-sky-900 hover:bg-gray-800 focus:outline-none"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? "inProccess..." : "Add Employee"}
+                      {isSubmitting ? "inProccess..." : employee ? "Edit Employee" : "Add Employee"}
                     </button>
                   </div>
                 </Form>
