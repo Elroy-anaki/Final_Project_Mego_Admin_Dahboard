@@ -8,7 +8,7 @@ import { EmployeeContext } from '../../../Contexts/EmployeeContext';
 
 function EmployeeRow({ Employee }) {
     const queryClient = useQueryClient()
-    // const {employee, setEmployee} = useContext(EmployeeContext)
+    const {employee, setEmployee} = useContext(EmployeeContext)
 
     const {mutate: deleteEmployee} = useMutation({
         mutationKey:['deleteEmployeeById'],
@@ -41,7 +41,8 @@ function EmployeeRow({ Employee }) {
                 <div className="inline-flex gap-3">
                     <button
                     onClick={() => {
-                        // setEmployee()
+                        setEmployee(Employee)
+                        console.log("Employee", Employee)
                         document.getElementById('addEmployeeModal').showModal()}}
                         className="text-blue-600 hover:text-blue-800"
                     >
