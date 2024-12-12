@@ -8,6 +8,10 @@ import {
 } from "react-router-dom";
 
 
+import EmployeeModal from './components/tables/EmployeesSection/Modal/EmployeeModal';
+import MealModal from './components/tables/MealsSection/Modal/MealModal.jsx';
+
+
 import SignIn from './forms/Auth/SignIn/SignIn'
 import SideBar from "./pages/SideBar/SideBar";
 import { useContext } from "react";
@@ -24,17 +28,14 @@ function Root({ isAuth }) {
   return (
     <>
       <div className="flex w-11/12 mx-auto">
-        
           {isAuth && <div className="w-1/5"><SideBar />   </div>}
-
-     
-        {/* <div className="w-4/5"> */}
-
           <Outlet />
-        
-        {/* </div> */}
-
       </div>
+
+        {/* Modals */}
+        <EmployeeModal />
+        <MealModal/>
+
     </>
   );
 }

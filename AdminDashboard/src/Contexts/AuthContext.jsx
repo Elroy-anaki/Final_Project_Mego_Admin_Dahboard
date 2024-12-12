@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { notifySuccess } from "../lib/Toasts/Toasts";
+import MealProvider from "./MealContext";
+import EmployeeProvider from "./EmployeeContext";
 
 
 export const AuthContext = createContext()
@@ -53,7 +55,11 @@ function AuthProvider({ children }) {
     };
     return (
         <AuthContext.Provider value={authGloblaState}>
+            <MealProvider>
+              <EmployeeProvider>
             {children}
+               </EmployeeProvider>
+            </MealProvider>
         </AuthContext.Provider >
     )
 

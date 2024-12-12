@@ -12,23 +12,19 @@ import MealProvider from './Contexts/MealContext.jsx';
 import AuthProvider from './Contexts/AuthContext.jsx';
 
 // Import Modals
-import EmployeeModal from './components/tables/EmployeesSection/Modal/EmployeeModal';
-import MealModal from './components/tables/MealsSection/Modal/MealModal.jsx';
+
 
 // Import UI
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { EmployeeContext } from './Contexts/EmployeeContext.jsx';
 
 
 createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <MealProvider>
         <ToastContainer />
-        <EmployeeModal />
-        <MealModal />
         <App />
-      </MealProvider>
     </AuthProvider>
   </QueryClientProvider>
 );
