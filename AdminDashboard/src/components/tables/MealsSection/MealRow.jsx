@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa6";
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { MealContext } from '../../../Contexts/MealContext'
+import { notifySuccess } from '../../../lib/Toasts/Toasts';
 
 
 function MealRow( {Meal} ) {
@@ -15,14 +16,12 @@ function MealRow( {Meal} ) {
         mutationKey: ['deleteMealById'],
         mutationFn: async () => {
             const { data } = await axios.delete(`/meals/delete-meal-by-id/${Meal._id}`);
-            console.log("M", data.msg);
+            console.log("M", data);
             return data;
         },
-        onSuccess: async (data) => {
+        onSuccess: async () => {
             await queryClient.invalidateQueries({ queryKey: ['getAllMeals'] });
-            console.log("os", data);
-            console.log(data.msg);
-            alert("End");
+            notifySuccess("Meal Deleted Successfully")
         },
         onError: (data) => { console.log(data) }
     });
@@ -53,9 +52,10 @@ function MealRow( {Meal} ) {
                         <Trash2 className="w-5 h-5" />
                     </button>
                     <button
-                        onClick={() => {
-                            alert("get");
-                            // getMeal.reviewsByMealId(Meal._id);
+                        onClick={ ()=> {
+                            
+                            setMeal(Meal);
+                            document.getElementById('mealDatails').showModal()
                         }}
                         className="text-purple-600 hover:text-purple-800"
                     >

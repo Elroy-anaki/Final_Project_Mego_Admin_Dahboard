@@ -56,19 +56,6 @@ function EmployeeModalForm() {
     }
   })
 
-
-  // const sendToServer = async (newEmployeeData) => {
-  //   try {
-  //     const { data } = await axios.post(
-  //       `/employees/add-employee`,
-  //       newEmployeeData,
-  //     );
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <Formik
       initialValues={employeeValues}
@@ -90,9 +77,9 @@ function EmployeeModalForm() {
                 <h1 className="text-2xl font-bold mb-8 text-gray-800">
                   {employee ? "Edit Employee" : "Add New Employee"}
                 </h1>
-                <Form id="addEmployeeForm">
+                <Form id="addEmployeeForm" className="space-y-4">
                   <div>
-                    <label className="block text-gray-700 mb-2" htmlFor="name">
+                    <label className="block text-gray-700 " htmlFor="name">
                       Full Name
                     </label>
                     <input
@@ -112,7 +99,7 @@ function EmployeeModalForm() {
                     ) : null}
                   </div>
                   <div>
-                    <label className="block text-gray-700 mb-2" htmlFor="Email">
+                    <label className="block text-gray-700 " htmlFor="Email">
                       Email
                     </label>
                     <input
@@ -124,6 +111,7 @@ function EmployeeModalForm() {
                       value={values?.employeeEmail}
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      disabled={employee ? true : false}
                     />
                     {touched.employeeEmail && errors.employeeEmail ? (
                       <div className="text-red-500 text-sm mt-1">
@@ -133,7 +121,7 @@ function EmployeeModalForm() {
                   </div>
                   <div>
                     <label
-                      className="block text-gray-700 mb-2"
+                      className="block text-gray-700 "
                       htmlFor="password"
                     >
                       Password
