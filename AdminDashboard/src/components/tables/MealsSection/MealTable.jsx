@@ -1,27 +1,13 @@
 import React from 'react';
-import { AddButton } from '../../common/Buttons/addButtons';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import MealRow from './MealRow';
 
 
-const MealTable = () => {
-  
-    const { data, isError, error, isLoading } = useQuery({
-        queryKey: ['getAllMeals'],
-        queryFn: async () => {
-            const { data } = await axios.get('/meals/get-all-meals')
-            console.log("mealss", data);
-            
-            return data;
-        },
-        staleTime: 1000 * 6
-    })
+const MealTable = ({meals}) => {
+      
     return (
         <div>
-      <div className="w-full border-2 border-sky-800 ">
-        {isLoading && <div>Loading...</div>}
-        {isError && <div>{error}</div>}
+      <div className="w-full border-2  border-sky-800  ">
+        
         <table className="w-full text-left ">
           <thead className="rounded-lg bg-sky-800 text-center">
             <tr>
@@ -33,7 +19,7 @@ const MealTable = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {data && data.data.map((meal) => <MealRow key={meal._id} Meal={meal} />)}
+            {meals && meals.map((meal) => <MealRow key={meal._id} Meal={meal} />)}
           </tbody>
         </table>
       </div>

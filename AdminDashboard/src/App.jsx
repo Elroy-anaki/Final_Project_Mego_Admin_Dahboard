@@ -22,6 +22,7 @@ import UsersSection from "./components/tables/UsersSections/UsersSection";
 import ResetPassword from "./forms/Auth/ResetPassword/ResetPassword";
 import { AuthContext } from './Contexts/AuthContext';
 import ForgotPassword from "./forms/Auth/ForgotPassword/ForgotPassword";
+import MealDetailsModal from "./components/tables/MealsSection/Modal/MealDetailsModal.jsx";
 
 
 function Root({ isAuth }) {
@@ -35,6 +36,7 @@ function Root({ isAuth }) {
         {/* Modals */}
         <EmployeeModal />
         <MealModal/>
+        <MealDetailsModal/>
 
     </>
   );
