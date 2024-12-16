@@ -5,7 +5,7 @@ import Input from "../Input";
 // import sigUpSchema from "../../../../schemas/signUp.schema";
 import axios from "axios";
 import { AuthContext } from '../../../Contexts/AuthContext'
-import { notifySuccess } from "../../../lib/Toasts/Toasts";
+import { notifySuccess ,notifyError } from "../../../lib/Toasts/Toasts";
 
 
 
@@ -27,7 +27,8 @@ function SignIn() {
         notifySuccess(`Welcome Back, ${data.data.employeeName}`)
         
     } catch (error) {
-        console.log(error)
+        console.log(error.response.data.msg)
+        notifyError(error.response.data.msg)
     }
   };
 

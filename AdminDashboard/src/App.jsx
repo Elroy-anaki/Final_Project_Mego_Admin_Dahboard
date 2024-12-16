@@ -19,6 +19,7 @@ import EmployeesSection from "./components/tables/EmployeesSection/EmployeesSect
 import OrdersSections from "./components/tables/ordersSection/OrdersSections";
 import MealsSection from "./components/tables/MealsSection/MealsSection";
 import UsersSection from "./components/tables/UsersSections/UsersSection";
+import ProfileSection from "./pages/profileSection/ProfileSection.jsx";
 import ResetPassword from "./forms/Auth/ResetPassword/ResetPassword";
 import { AuthContext } from './Contexts/AuthContext';
 import ForgotPassword from "./forms/Auth/ForgotPassword/ForgotPassword";
@@ -67,6 +68,7 @@ function App() {
         <Route path="orders" element={<OrdersSections />} />
         <Route path="meals" element={<MealsSection />} />
         <Route path="users" element={<UsersSection />} />
+        <Route path="profile" element={<ProfileSection key={"profile"} employee={employee} />} />
         </Route>
       </Route>
     )

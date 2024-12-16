@@ -67,6 +67,12 @@ function SideBar() {
                 <span className="flex-1 ms-3 whitespace-nowrap">Users</span>
               </Link>
             </li>
+            <li>
+              <Link to={'/dashboard/profile'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <span><CgProfile size={20} /></span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Profile</span>
+              </Link>
+            </li>
             <li >
               <Link onClick={singOut} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <span className='text-red-600'><GoSignOut size={20} /></span>
