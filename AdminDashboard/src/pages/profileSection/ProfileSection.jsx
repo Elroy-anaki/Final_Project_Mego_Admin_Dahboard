@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { notifySuccess , notifyError } from "../../lib/Toasts/Toasts";
+import {useNavigate} from "react-router-dom"
 
 const validationSchema = Yup.object({
   employeeEmail: Yup.string().email("Invalid email address").required("must"),
@@ -20,6 +21,7 @@ const initialValues = {
 };
 
 function ProfileSection({ employee }) {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const [employeeValues, setValues] = useState(initialValues);
@@ -40,29 +42,22 @@ function ProfileSection({ employee }) {
 
   const { mutate: EditProfile } = useMutation({
     mutationKey: ["EditProfile"],
-    mutationFn: async (employeeDetails) => {
-        try{
-      const response = await axios({
-        method:"PUT" ,
-        data: employeeDetails,
-        url: `/employees/edit-employee-by-id/${employee._id}`,
-      });
-      console.log("Full response:", response);
-      console.log("Response data:", response.data);
-    //   console.log("israel",data.data);
-      notifySuccess(`The change was successful`)
-      return data;
-    }catch(error){
-        console.log(error)
-    }
-    },
+    mutationFn: async (employeeDetails) => await axios.put(`/employees/edit-employee-by-id/${employee._id}`, employeeDetails),
+    
     onSuccess: async (data) => {
-      await queryClient.invalidateQueries({ queryKey: ["getAllemployees"] });
       console.log(data);
-      notifyError(`The change was not successful`)
-
+      await queryClient.invalidateQueries({ queryKey: ["getAllemployees"] });
+      notifySuccess(`The change was successful${data.data.msg}`)
+      navigate('/dashboard/users')
     },
-  });
+    onError: (error) => {
+      console.log(error)
+      notifyError( error.message)
+    }
+  })
+      
+
+
 
   return (
     <div className="flex justify-center items-center w-full h-screen">
@@ -134,24 +129,11 @@ function ProfileSection({ employee }) {
                             value={values?.employeeEmail}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            //   disabled={employee ? true : false}
+                          
                           />
                           {touched.employeeEmail && errors.employeeEmail ? (
                             <div className="text-red-500 text-sm mt-1">
                               {errors.employeeEmail}
-                            </div>
-                          ) : null}
-                        </div>
-                        
-                        <div>
-                          {/* <Select
-                    value={values?.premission}
-                     onChange={handleChange} /> */}
-
-                          {touched.employeePremission &&
-                          errors.employeePremission ? (
-                            <div className="text-red-500 text-sm mt-1">
-                              {errors.employeePremission}
                             </div>
                           ) : null}
                         </div>
