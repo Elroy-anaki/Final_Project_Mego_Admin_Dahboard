@@ -12,7 +12,11 @@ import Pagination from '../../common/Pagination/Pagination';
 import SearchInput from '../../common/SearchInput/SearchInput';
 
 
+
 function MealSection() {
+
+  const [field, setField] =  useState('mealName')
+  const [sort, setSort] = useState('1') 
 
   const {setMeal} = useContext(MealContext)
   const [page, setPage] = useState(1);
@@ -21,9 +25,9 @@ function MealSection() {
 
   
   const { data, isError, error, isLoading } = useQuery({
-    queryKey: ['getAllMeals', page],
+    queryKey: ['getAllMeals', page, field, sort],
     queryFn: async () => {
-      const { data } = await axios.get(`/meals/get-all-meals?page=${page}&limit=${limit}`)
+      const { data } = await axios.get(`/meals/get-all-meals?page=${page}&search=${field}&sortBy=${sort}&limit=${limit}`)
       return data;
     },
     staleTime: 1000 * 6
@@ -33,6 +37,11 @@ function MealSection() {
       setMeal(item);
       document.getElementById('mealDatails').showModal();
   };
+
+  function handelSort(field, sort){
+    setField(field)
+    setSort(sort)
+  }
 
   return (
     <div className='w-[75%] relative mt-10 '>
@@ -72,7 +81,7 @@ function MealSection() {
       </div>
 
       <div className=''>
-        {data && <MealTable meals={data.data} />} </div>
+        {data && <MealTable meals={data.data} sortFn={handelSort} />} </div>
 
     </div>
   )

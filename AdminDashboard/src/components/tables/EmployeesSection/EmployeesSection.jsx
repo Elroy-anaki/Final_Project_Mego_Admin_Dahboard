@@ -5,37 +5,49 @@ import { AddButton } from '../../common/Buttons/addButtons';
 import Pagination from '../../common/Pagination/Pagination';
 import axios from 'axios';
 import SearchInput from '../../common/SearchInput/SearchInput';
-import { debounce } from '../../../lib/debounce/debounce';
 import { EmployeeContext } from '../../../Contexts/EmployeeContext';
 import { useSearch } from '../../../hooks/searchHook.jsx/useSearch';
+import FilterZone from '../../common/FilterZone/FilterZone';
 
 
+
+const filterBtn = [
+    {title: "Employee", value: "employee"},
+    {title: "Admin", value: "admin"},
+    {title:"All", value: "all"}
+]
 
 function EmployeesSection() {
-    const {setEmployee} = useContext(EmployeeContext)
+    const { setEmployee } = useContext(EmployeeContext)
     const [page, setPage] = useState(1)
     const [limit, setLimit] = useState(5)
+    const [premission, setPremission] = useState('all')
     const [suggestions, setSearchInput] = useSearch('employees');
 
 
 
     const { data, isError, error, isLoading } = useQuery({
-        queryKey: ['getAllemployees', page],
+        queryKey: ['getAllemployees', page, premission],
         queryFn: async () => {
-            const { data } = await axios.get(`/employees/get-all-employees?page=${page}&limit=${limit}`);
-            console.log("DATADATADATA:", data)
+            const { data } = await axios.get(`/employees/get-all-employees?page=${page}&search=${premission}&limit=${limit}`);
             return data;
         },
 
     });
-      
-   
+
+    function handelFilter(pre) {
+        setPremission(pre)
+    }
 
     function showEmployeeFromSuggestion(item) {
         setEmployee(item);
         document.getElementById('addEmployeeModal').showModal();
-
     }
+    useEffect(() => {
+        console.log(premission)
+    }
+        , [premission])
+
     return (
         <div className='w-[75%] relative mt-10'>
             <div>
@@ -51,7 +63,7 @@ function EmployeesSection() {
                             onClick={() => document.getElementById('addEmployeeModal').showModal()}
                             className=''
                         >
-                            <AddButton text='Add Meal +' />
+                            <AddButton text='Add Employee +' />
                         </div>
 
                         <div className='w-72'>
@@ -67,12 +79,15 @@ function EmployeesSection() {
 
                         <Pagination CountOfItems={data?.count} changeState={setPage} page={page} limit={limit} />
                     </div>
+                    <div>
+                        <FilterZone fn={handelFilter} btnData={filterBtn} />
+                    </div>
 
                 </div>
                 {isLoading && <span className="loading loading-infinity loading-xs text-sky-700"></span>}
                 {isError && <div>{error}</div>}
             </div>
-            <div className=''>
+            <div className='z-10'>
                 {data && <EmployeesTable employees={data.data} />} </div>
         </div>
     )

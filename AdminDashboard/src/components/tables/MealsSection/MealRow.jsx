@@ -5,6 +5,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { MealContext } from '../../../Contexts/MealContext'
 import { notifySuccess } from '../../../lib/Toasts/Toasts';
+import { FaArrowUp } from "react-icons/fa";
+
 
 
 function MealRow( {Meal} ) {
