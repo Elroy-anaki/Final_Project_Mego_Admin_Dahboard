@@ -7,7 +7,7 @@ import axios from 'axios';
 import SearchInput from '../../common/SearchInput/SearchInput';
 import { debounce } from '../../../lib/debounce/debounce';
 import { EmployeeContext } from '../../../Contexts/EmployeeContext';
-
+import { useSearch } from '../../../hooks/searchHook.jsx/useSearch';
 
 
 
@@ -15,8 +15,8 @@ function EmployeesSection() {
     const {setEmployee} = useContext(EmployeeContext)
     const [page, setPage] = useState(1)
     const [limit, setLimit] = useState(5)
-    const [searchInput, setSearchInput] = useState('');
-    const [suggestions, setSuggestions] = useState(null);
+    const [suggestions, setSearchInput] = useSearch('employees');
+
 
 
     const { data, isError, error, isLoading } = useQuery({
@@ -28,28 +28,8 @@ function EmployeesSection() {
         },
 
     });
-      async function getSuggestions(source) {
-        try {
-          const { data } = await axios.get(`/employees/auto-complete?query=${searchInput}`, {
-            cancelToken: source.token
-          })
-          setSuggestions(data.data)
-    
-        } catch (error) {
-          console.log(error);
-        }
-      };
-    useEffect(() => {
-        const source = axios.CancelToken.source();
-        console.log(suggestions);
-
-        const proccesChange = debounce(() => getSuggestions(source));
-        proccesChange();
-
-        return () => {
-            source.cancel("Token Canceled");
-        }
-    }, [searchInput]);
+      
+   
 
     function showEmployeeFromSuggestion(item) {
         setEmployee(item);

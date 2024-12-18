@@ -1,13 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+// Import Hooks + Network utils
+import React, { useContext, useState } from 'react'
+import { useQuery } from '@tanstack/react-query';
+import { useSearch } from '../../../hooks/searchHook.jsx/useSearch';
+import axios from 'axios';
+
+// Import Components + Context
+import { MealContext } from '../../../Contexts/MealContext';
 import MealTable from './MealTable'
 import { AddButton } from '../../common/Buttons/addButtons'
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import Pagination from '../../common/Pagination/Pagination';
 import SearchInput from '../../common/SearchInput/SearchInput';
-import { debounce } from '../../../lib/debounce/debounce'
-import { MealContext } from '../../../Contexts/MealContext';
-
 
 
 function MealSection() {
@@ -15,10 +17,9 @@ function MealSection() {
   const {setMeal} = useContext(MealContext)
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
-  const [searchInput, setSearchInput] = useState('');
-  const [suggestions, setSuggestions] = useState(null);
+  const [suggestions, setSearchInput] = useSearch('meals');
 
-
+  
   const { data, isError, error, isLoading } = useQuery({
     queryKey: ['getAllMeals', page],
     queryFn: async () => {
@@ -28,36 +29,10 @@ function MealSection() {
     staleTime: 1000 * 6
   });
 
-  async function getSuggestions(source) {
-    try {
-      const { data } = await axios.get(`/meals/auto-complete?query=${searchInput}`, {
-        cancelToken: source.token
-      })
-      setSuggestions(data.data)
-
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-    console.log(suggestions);
-    
-    const proccesChange = debounce(() => getSuggestions(source));
-    proccesChange();
-
-    return () => {
-      source.cancel("Token Canceled");
-    }
-  }, [searchInput]);
-
   function showMealFromSuggestion(item){
       setMeal(item);
       document.getElementById('mealDatails').showModal();
-  
-  }
-
+  };
 
   return (
     <div className='w-[75%] relative mt-10 '>

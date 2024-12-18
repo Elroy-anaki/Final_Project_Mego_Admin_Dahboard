@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { notifySuccess , notifyError } from "../../lib/Toasts/Toasts";
+import { notifySuccess , notifyError } from "../../../lib/Toasts/Toasts";
 import {useNavigate} from "react-router-dom"
 
 const validationSchema = Yup.object({
