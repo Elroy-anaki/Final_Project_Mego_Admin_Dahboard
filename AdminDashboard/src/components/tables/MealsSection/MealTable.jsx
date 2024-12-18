@@ -1,32 +1,52 @@
-import React from 'react';
-import MealRow from './MealRow';
+import React from "react";
+import MealRow from "./MealRow";
+import TableHeader from "./TableHeader";
+
+const MealTable = ({ meals, sortFn }) => {
 
 
-const MealTable = ({meals}) => {
-      
-    return (
-        <div>
-      <div className="w-full border-2  border-sky-800  ">
-        
-        <table className="w-full text-left ">
-          <thead className="rounded-lg bg-sky-800 text-center">
+  return (
+    <div className=" bg-gray-100">
+      <div className="overflow-hidden  shadow-lg border-2 border-sky-800">
+        <table className="w-full text-left bg-white">
+          <thead className="bg-sky-800">
             <tr>
-              <th className="px-6 py-3 text-lg font-medium text-white">Name</th>
-              <th className="px-6 py-3 text-lg font-medium text-white">Price</th>
-              <th className="px-6 py-3 text-lg font-medium text-white">Image</th>
-              <th className="px-6 py-3 text-lg font-medium text-white">Reviews</th>
-              <th className="px-6 py-1 text-lg font-medium text-white">Actions</th>
+              <TableHeader
+                title="Name"
+                sort={sortFn}
+                field={"mealName"}
+                needToSort={true}
+                />
+              <TableHeader
+                title="Price"
+                sort={sortFn}
+                field={"mealPrice"}
+                needToSort={true}
+                />
+              <TableHeader
+                title="Image"
+                needToSort={false}
+              />
+              <TableHeader
+                title="Reviews"
+                sort={sortFn}
+                needToSort={true}
+              />
+              <TableHeader
+                title="Actions"
+                sort={sortFn}
+              />
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {meals && meals.map((meal) => <MealRow key={meal._id} Meal={meal} />)}
+            {meals && meals.map((meal) => (
+              <MealRow key={meal._id} Meal={meal} />
+            ))}
           </tbody>
         </table>
       </div>
-
     </div>
-    
-  )
-}
+  );
+};
 
-export default MealTable
+export default MealTable;
