@@ -8,8 +8,8 @@ import SearchInput from '../../common/SearchInput/SearchInput';
 import { EmployeeContext } from '../../../Contexts/EmployeeContext';
 import { useSearch } from '../../../hooks/searchHook.jsx/useSearch';
 import FilterZone from '../../common/FilterZone/FilterZone';
-
-
+import ExportButton from '../../common/Buttons/ExportButton';
+import { downloadEmployees } from '../../../lib/exportXL/exportXL'; 
 
 const filterBtn = [
     {title: "Employee", value: "employee"},
@@ -54,9 +54,9 @@ function EmployeesSection() {
                 <h1 className='text-5xl text-slate-600 text-center mx-auto'>Employees</h1>
             </div>
             <div className='mt-12'>
-
+            <ExportButton download={() => downloadEmployees(premission, data?.count)} />
                 <div className='flex justify-between'>
-
+                        
                     <div
                         className=' text-center flex justify-start items-center'>
                         <div
