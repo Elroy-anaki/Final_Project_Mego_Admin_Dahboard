@@ -10,8 +10,8 @@ import MealTable from './MealTable'
 import { AddButton } from '../../common/Buttons/addButtons'
 import Pagination from '../../common/Pagination/Pagination';
 import SearchInput from '../../common/SearchInput/SearchInput';
-
-
+import ExportButton from '../../common/Buttons/ExportButton';
+import {downloadMeals} from "../../../lib/exportXL/exportXL"
 
 function MealSection() {
 
@@ -49,7 +49,7 @@ function MealSection() {
         <h1 className='text-5xl text-slate-600 text-center mx-auto '>Meals</h1>
       </div>
       <div className='mt-12'>
-
+      <ExportButton download={() => downloadMeals(sort, field, data.count)} />
         <div className='flex justify-between'>
 
           <div

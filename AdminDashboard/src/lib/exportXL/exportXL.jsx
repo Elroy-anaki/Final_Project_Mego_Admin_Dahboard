@@ -35,3 +35,26 @@ export async function downloadEmployees(premission, count) {
         notifyError("Download Failed")
     }
 };  
+export async function downloadMeals(sort, field, count) {
+    try {
+        if (!count) return;
+        const { data } = await axios.get(`/meals/get-all-meals?page=1&search=${field}&sortBy=${sort}&limit=${count}`)
+        if (!data?.data) return;
+        console.log(data.data)
+        const meals = data.data.map(meal => ({
+            "Name": meal.mealName,
+            "Price": `$${meal.mealPrice}`,
+            "Calories": meal.amoutnOfCalories,
+            "Categories": (Array.isArray(meal.mealCategories) 
+                        ? meal.mealCategories.map(cat => cat.categoryName).join(', ') 
+                        : meal.mealCategories.categoryName),
+            "Created": new Date(meal.createdAt).toLocaleDateString('he-IL'),
+            "Last Update": new Date(meal.updatedAt).toLocaleDateString('he-IL')
+        }));
+        exportXL(meals, "MealsSheet");
+        notifySuccess("Download Excel File")
+    } catch (error) {
+        console.log("Failed to download excel:", error);
+        notifyError("Download Failed")
+    }
+};  
