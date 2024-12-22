@@ -40,7 +40,6 @@ export async function downloadMeals(sort, field, count) {
         if (!count) return;
         const { data } = await axios.get(`/meals/get-all-meals?page=1&search=${field}&sortBy=${sort}&limit=${count}`)
         if (!data?.data) return;
-        console.log(data.data)
         const meals = data.data.map(meal => ({
             "Name": meal.mealName,
             "Price": `$${meal.mealPrice}`,
