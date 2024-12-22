@@ -4,7 +4,7 @@ import {useMutation, useQueryClient} from '@tanstack/react-query'
 import axios from 'axios';
 import { notifySuccess } from '../../../lib/Toasts/Toasts';
 import { EmployeeContext } from '../../../Contexts/EmployeeContext';
-
+import EmailButton from '../../common/Buttons/EmailButton';
 
 function EmployeeRow({ Employee }) {
     const queryClient = useQueryClient()
@@ -39,6 +39,8 @@ function EmployeeRow({ Employee }) {
             <td className="px-6 py-4 text-sm text-gray-900 text-center">{Employee.premission}</td>
             <td className="px-6 py-4 text-sm text-center ">
                 <div className="inline-flex gap-3">
+                <EmailButton email={Employee.employeeEmail} />
+
                     <button
                     onClick={() => {
                         setEmployee(Employee)
