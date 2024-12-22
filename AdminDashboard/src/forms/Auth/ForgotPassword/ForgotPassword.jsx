@@ -9,7 +9,7 @@ function ForgotPassword() {
     e.preventDefault()
     notifySuccess("Check Your Email...")
     try {
-      const { data } = await axios.post('http://localhost:3000/auth/forgot-password', { email: e.target.email.value })
+      const { data } = await axios.post('http://localhost:3000/auth/forgot-password', { email: e.target.email.value, premission:'employee' })
       console.log(data)
     } catch (error) {
       console.log("Error", error)
