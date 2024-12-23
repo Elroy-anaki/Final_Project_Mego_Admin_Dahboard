@@ -24,6 +24,7 @@ import ResetPassword from "./forms/Auth/ResetPassword/ResetPassword";
 import { AuthContext } from './Contexts/AuthContext';
 import ForgotPassword from "./forms/Auth/ForgotPassword/ForgotPassword";
 import MealDetailsModal from "./components/tables/MealsSection/Modal/MealDetailsModal.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
 
 
 function Root({ isAuth }) {
@@ -51,10 +52,10 @@ function App() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Root isAuth={isAuth} />}>
+      <Route path="/" element={<Root isAuth={isAuth} />} errorElement={<ErrorPage />}>
 
         {/* Public Routes */}
-        <Route element={!isAuth ? <Outlet /> : <Navigate to={"/dashboard/meals"} />}>
+        <Route element={!isAuth ? <Outlet /> : <Navigate to={"/dashboard/meals"} />} >
           <Route index element={<SignIn />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
