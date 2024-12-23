@@ -2,9 +2,7 @@ import React from "react";
 import { FaFileExcel } from "react-icons/fa";
 
 function ExportButton({ download }) {
-// function name() {
-//   download()
-// }
+
   return (
     <div className="tooltip" data-tip="Export To XL">
       <button
