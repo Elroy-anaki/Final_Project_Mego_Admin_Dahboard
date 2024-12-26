@@ -6,10 +6,13 @@ import axios from 'axios';
 import { MealContext } from '../../../Contexts/MealContext'
 import { notifySuccess } from '../../../lib/Toasts/Toasts';
 import { FaArrowUp } from "react-icons/fa";
+import StarRating from '../../common/StarRating/StarRating';
 
 
 
 function MealRow( {Meal} ) {
+    const {rating} = Meal;
+    
     const { setMeal } = useContext(MealContext);
 
     const queryClient = useQueryClient();
@@ -27,6 +30,7 @@ function MealRow( {Meal} ) {
         },
         onError: (data) => { console.log(data) }
     });
+    
 
     return (
         <tr key={Meal._id} className="hover:bg-sky-100">
@@ -35,7 +39,7 @@ function MealRow( {Meal} ) {
             <td className="px-6 py-4 text-sm text-gray-900 text-center flex justify-center">
                 <img src={Meal.mealImage} alt={Meal.mealName} className="w-12 h-12 rounded-xl" />
             </td>
-            <td className="px-6 py-4 text-sm text-gray-900 text-center">-----</td>
+            <td className="px-6 py-4 text-sm text-gray-900 text-center">{rating ?<StarRating rating={rating.avgOfRating} /> :"-----"}</td>
             <td className="px-6 py-4 text-sm text-center">
                 <div className="inline-flex gap-3">
                     <button
