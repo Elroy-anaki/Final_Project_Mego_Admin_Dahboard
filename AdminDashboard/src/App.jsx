@@ -16,7 +16,7 @@ import SignIn from './forms/Auth/SignIn/SignIn'
 import SideBar from "./pages/SideBar/SideBar";
 import { useContext } from "react";
 import EmployeesSection from "./components/tables/EmployeesSection/EmployeesSection";
-import OrdersSections from "./components/tables/ordersSection/OrdersSections";
+import OrdersSection from "./components/tables/ordersSection/OrdersSection";
 import MealsSection from "./components/tables/MealsSection/MealsSection";
 import UsersSection from "./components/tables/UsersSections/UsersSection";
 import ProfileSection from "./components/tables/profileSection/ProfileSection.jsx";
@@ -67,7 +67,7 @@ function App() {
         {/* Private Routes */}
         <Route path="/dashboard" element={!isAuth ? <Navigate to={'/'}/> : <Outlet/>}>
         <Route path="employees" element={employee?.premission === 'admin'? <EmployeesSection />: <Navigate to={'/dashboard/meals'}/>} />
-        <Route path="orders" element={<OrdersSections />} />
+        <Route path="orders" element={<OrdersSection />} />
         <Route path="meals" element={<MealsSection />} />
         <Route path="users" element={<UsersSection />} />
         <Route path="profile" element={<ProfileSection key={"profile"} employee={employee} />} />
