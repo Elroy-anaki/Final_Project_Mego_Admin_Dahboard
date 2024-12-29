@@ -10,9 +10,9 @@ import StarRating from '../../common/StarRating/StarRating';
 
 
 
-function MealRow( {Meal} ) {
-    const {rating} = Meal;
-    
+function MealRow({ Meal }) {
+    const { rating } = Meal;
+
     const { setMeal } = useContext(MealContext);
 
     const queryClient = useQueryClient();
@@ -30,16 +30,18 @@ function MealRow( {Meal} ) {
         },
         onError: (data) => { console.log(data) }
     });
-    
+
 
     return (
-        <tr key={Meal._id} className="hover:bg-sky-100">
+        <tr key={Meal._id} className="hover:bg-sky-100 ">
             <td className="px-6 py-4 text-md font-semibold text-gray-900 text-center">{Meal.mealName}</td>
             <td className="px-6 py-4 text-sm text-gray-900 text-center">{Meal.mealPrice}</td>
             <td className="px-6 py-4 text-sm text-gray-900 text-center flex justify-center">
                 <img src={Meal.mealImage} alt={Meal.mealName} className="w-12 h-12 rounded-xl" />
             </td>
-            <td className="px-6 py-4 text-sm text-gray-900 text-center">{rating ?<StarRating rating={rating.avgOfRating} /> :"-----"}</td>
+            <td className="px-6 py-4 text-sm text-gray-900 text-center "><div className="inline-block">
+                {rating ? <StarRating rating={rating.avgOfRating} /> : "-----"}
+            </div></td>
             <td className="px-6 py-4 text-sm text-center">
                 <div className="inline-flex gap-3">
                     <button
@@ -58,8 +60,8 @@ function MealRow( {Meal} ) {
                         <Trash2 className="w-5 h-5" />
                     </button>
                     <button
-                        onClick={ ()=> {
-                            
+                        onClick={() => {
+
                             setMeal(Meal);
                             document.getElementById('mealDatails').showModal()
                         }}
