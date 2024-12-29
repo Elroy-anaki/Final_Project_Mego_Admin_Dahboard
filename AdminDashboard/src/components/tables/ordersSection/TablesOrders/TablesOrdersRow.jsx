@@ -39,7 +39,7 @@ function TablesOrdersRow({ orderTable }) {
                     console.log(orderTable.table.meals)
                     setMealsForOrder(orderTable.table.meals)
                 }}>
-            Meals</td>
+            Meals <span className='text-xs'>({orderTable.table.meals.length})</span></td>
             <td className="px-6 py-4 text-lg font-semibold text-gray-900 text-center ">{orderTable?.table?.totalPrice || 0}$</td>
             <td className="px-6 py-4 text-md text-center flex flex-col gap-1 font-semibold">
                 <div>{orderTable.dateTime.date}</div>
