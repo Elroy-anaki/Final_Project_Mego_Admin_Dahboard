@@ -2,15 +2,29 @@ import React, { useState } from 'react';
 import TablesOrdersRow from './TablesOrdersRow';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import FilterZone from '../../../common/FilterZone/FilterZone';
 
 
+const filterBtn = [
+  {title: "All", value: "all"},
+    {title: "Pending", value: "pending"},
+    {title:"Eating", value: "eating"},
+    {title:"Paid", value: "paid"}
+]
 
 const TablesOrdersTable = () => {
 
+  const [status, setStatus] = useState('all')
+
+  function handelFilter(status){
+    setStatus(status)
+
+  }
+
   const { data } = useQuery({
-    queryKey: ['getAllTablesOrders'],
+    queryKey: ['getAllTablesOrders', status],
     queryFn: async () => {
-      const response = await axios.get('/orders/get-all-orders-tables');
+      const response = await axios.get(`/orders/get-all-orders-tables?status=${status}`);
       console.log("response.dataaaaaaaa", response.data);
       return response.data; 
     },
@@ -21,7 +35,9 @@ const TablesOrdersTable = () => {
 
   return (
     <div>
+      <FilterZone fn={handelFilter} btnData={filterBtn} />
       <div className="w-full border-2 border-sky-800 ">
+        
         
         <table className="w-full text-left ">
           <thead className="rounded-lg bg-sky-800 text-center">

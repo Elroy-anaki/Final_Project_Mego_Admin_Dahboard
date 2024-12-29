@@ -9,6 +9,7 @@ import { MealsForOrderContext } from '../../../../Contexts/MealsForOrderContext'
 
 function TablesOrdersRow({ orderTable }) {
 
+
     const { setMealsForOrder} = useContext(MealsForOrderContext)
     console.log(orderTable)
     const queryclient = useQueryClient()
@@ -33,18 +34,19 @@ function TablesOrdersRow({ orderTable }) {
             <td className="px-6 py-4 text-md font-semibold text-gray-900 text-center">#{String(orderTable._id).slice(0, 7)}</td>
             <td className="px-6 py-4 text-md text-gray-900 text-center">{orderTable.user.userName}</td>
             <td className="px-6 py-4 text-md text-gray-900 text-center ">{orderTable.numberOfGuests}</td>
-            <td className="px-6 py-4 text-sm text-center"
+            <td className="px-6 py-4 text-md text-center cursor-pointer"
                 onClick={() => {document.getElementById('mealsForOrderModal').showModal()
                     console.log(orderTable.table.meals)
                     setMealsForOrder(orderTable.table.meals)
                 }}>
-                ll</td>
+            Meals</td>
             <td className="px-6 py-4 text-lg font-semibold text-gray-900 text-center ">{orderTable?.table?.totalPrice || 0}$</td>
             <td className="px-6 py-4 text-md text-center flex flex-col gap-1 font-semibold">
                 <div>{orderTable.dateTime.date}</div>
                 <div className='text-sm'>{orderTable.dateTime.time}</div></td>
             <td className="px-6 py-4 text-sm text-center">
                 <select
+                disabled={orderTable.status === 'paid'}
                     onChange={(e) => changeStatus({ newStatus: e.target.value, type: 'orderTable' })}
                     value={orderTable.status}
                     className={`border border-gray-300 rounded-md px-4 py-2 
