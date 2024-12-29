@@ -25,6 +25,7 @@ import { AuthContext } from './Contexts/AuthContext';
 import ForgotPassword from "./forms/Auth/ForgotPassword/ForgotPassword";
 import MealDetailsModal from "./components/tables/MealsSection/Modal/MealDetailsModal.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import MealsForOrderModal from "./components/tables/ordersSection/TablesOrders/Modal/MealsForOrderModal.jsx";
 
 
 function Root({ isAuth }) {
@@ -36,8 +37,9 @@ function Root({ isAuth }) {
       </div>
 
         {/* Modals */}
-        <EmployeeModal />
         <MealModal/>
+        <MealsForOrderModal/>
+        <EmployeeModal />
         <MealDetailsModal/>
 
     </>

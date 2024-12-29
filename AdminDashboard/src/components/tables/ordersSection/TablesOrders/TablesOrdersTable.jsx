@@ -11,7 +11,7 @@ const TablesOrdersTable = () => {
     queryKey: ['getAllTablesOrders'],
     queryFn: async () => {
       const response = await axios.get('/orders/get-all-orders-tables');
-      console.log(response.data);
+      console.log("response.dataaaaaaaa", response.data);
       return response.data; 
     },
     select: (data) => data.data ,
