@@ -10,6 +10,7 @@ import {
 
 import EmployeeModal from './components/tables/EmployeesSection/Modal/EmployeeModal';
 import MealModal from './components/tables/MealsSection/Modal/MealModal.jsx';
+import ReviewsModal from "./modals/reviews.model/ReviewsModal.jsx";
 
 
 import SignIn from './forms/Auth/SignIn/SignIn'
@@ -39,6 +40,7 @@ function Root({ isAuth }) {
         <EmployeeModal />
         <MealModal/>
         <MealDetailsModal/>
+        <ReviewsModal/>
 
     </>
   );
