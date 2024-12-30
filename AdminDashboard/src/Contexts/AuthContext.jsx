@@ -3,6 +3,7 @@ import axios from "axios";
 import { notifySuccess } from "../lib/Toasts/Toasts";
 import MealProvider from "./MealContext";
 import EmployeeProvider from "./EmployeeContext";
+import UserProvider from "./UserContext";
 
 
 export const AuthContext = createContext()
@@ -59,7 +60,9 @@ function AuthProvider({ children }) {
         <AuthContext.Provider value={authGloblaState}>
             <MealProvider>
               <EmployeeProvider>
+                <UserProvider>
             {children}
+            </UserProvider> 
                </EmployeeProvider>
             </MealProvider>
         </AuthContext.Provider >

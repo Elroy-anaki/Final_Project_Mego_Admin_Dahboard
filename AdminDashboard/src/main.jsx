@@ -18,6 +18,7 @@ import AuthProvider from './Contexts/AuthContext.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { EmployeeContext } from './Contexts/EmployeeContext.jsx';
+import { UserContext } from './Contexts/UserContext.jsx';
 
 
 createRoot(document.getElementById('root')).render(
