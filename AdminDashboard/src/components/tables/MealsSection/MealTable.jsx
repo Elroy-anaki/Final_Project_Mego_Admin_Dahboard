@@ -25,12 +25,11 @@ const MealTable = ({ meals, sortFn }) => {
                 />
               <TableHeader
                 title="Image"
-                needToSort={false}
+                
               />
               <TableHeader
                 title="Reviews"
-                sort={sortFn}
-                needToSort={true}
+                needToSort={false}
               />
               <TableHeader
                 title="Actions"

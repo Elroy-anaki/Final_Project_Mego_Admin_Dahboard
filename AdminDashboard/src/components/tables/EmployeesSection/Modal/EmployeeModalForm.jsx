@@ -23,7 +23,7 @@ const initialValues = {
 function EmployeeModalForm() {
   const queryClient = useQueryClient()
 
-  const { employee } = useContext(EmployeeContext);
+  const { employee, setEmployee } = useContext(EmployeeContext);
   const [employeeValues, setValues] = useState(initialValues)
 
   useEffect(() => {
@@ -62,11 +62,10 @@ function EmployeeModalForm() {
       validationSchema={validationSchema}
       enableReinitialize
       onSubmit={async (values, actions) => {
-        console.log(values);
-        alert("yes");
         addOrEditEmployee(values);
         actions.resetForm()
-        document.getElementById('addEmployeeModal').close()
+        document.getElementById('addEmployeeModal').close();
+        setEmployee(null)
       }}
     >
       {({ values, handleChange, handleBlur, errors, touched, isSubmitting }) => (

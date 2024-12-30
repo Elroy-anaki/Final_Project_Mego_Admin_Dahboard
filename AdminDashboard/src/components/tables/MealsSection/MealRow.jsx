@@ -63,7 +63,7 @@ function MealRow({ Meal }) {
                         onClick={() => {
 
                             setMeal(Meal);
-                            document.getElementById('mealDatails').showModal()
+                            document.getElementById('mealDetails').showModal()
                         }}
                         className="text-purple-600 hover:text-purple-800"
                     >
