@@ -10,7 +10,7 @@ import {
 
 import EmployeeModal from './components/tables/EmployeesSection/Modal/EmployeeModal';
 import MealModal from './components/tables/MealsSection/Modal/MealModal.jsx';
-import ReviewsModal from "./modals/reviews.model/ReviewsModal.jsx";
+import ReviewsModal from "./modals/reviews.modal/ReviewsModal.jsx";
 
 
 import SignIn from './forms/Auth/SignIn/SignIn'
