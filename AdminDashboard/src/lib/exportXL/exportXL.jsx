@@ -1,6 +1,7 @@
 import * as XLSX from "xlsx";
 import axios from "axios";
 import { notifyError, notifySuccess } from '../Toasts/Toasts'
+import { LucideChartGantt } from "lucide-react";
 
 export function exportXL(json, exelName) {
     // Generate XL Page
@@ -51,6 +52,35 @@ export async function downloadMeals(sort, field, count) {
             "Last Update": new Date(meal.updatedAt).toLocaleDateString('he-IL')
         }));
         exportXL(meals, "MealsSheet");
+        notifySuccess("Download Excel File")
+    } catch (error) {
+        console.log("Failed to download excel:", error);
+        notifyError("Download Failed")
+    }
+};  
+export async function downloadOrders(status) {
+    try {
+        if (!status) return;
+        const { data } = await axios.get(`/orders/get-all-orders-tables?status=${status}`)
+        if (!data?.data) return;
+        console.log(data.data)
+
+        const orders = data.data.map(order => ({
+        "Order ID": order._id,
+        "User Name": order.user?.userName,
+        "Number of Guests": order.numberOfGuests,
+        "Date": order.dateTime?.date,
+        "Time": order.dateTime?.time,
+        "Payment Status": order.status,
+        "Table": {
+            "Shared With": order.table?.sharedWith?.length || 0,
+            "Total Price": `$${order.table?.totalPrice?.toFixed(2) || '0.00'}`,
+            "Meals": order.table?.meals?.map(meal => meal.mealName).join(', ') || "None"
+        },
+        "Created At": new Date(order.createdAt).toLocaleDateString('he-IL'),
+        "Last Updated": new Date(order.updatedAt).toLocaleDateString('he-IL'),
+    }));
+        exportXL(orders, "OrdersSheet");
         notifySuccess("Download Excel File")
     } catch (error) {
         console.log("Failed to download excel:", error);
