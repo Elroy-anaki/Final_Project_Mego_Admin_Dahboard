@@ -7,7 +7,7 @@ function ReviewsModal() {
   const { meal, setMeal } = useContext(MealContext);
   console.log("mmmmeeeeeaaaaalllllll", meal);
   return (
-    <dialog id="revoews_modal" className="modal">
+    <dialog id="reviews_modal" className="modal">
       <div className="modal-box w-[60vw] h-[60vh]">
         <ReviewsTable meal={meal} />
         <div className="modal-action">
