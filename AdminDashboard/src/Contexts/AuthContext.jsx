@@ -32,7 +32,7 @@ function AuthProvider({ children }) {
 
     const singOut = async () => {
         try {
-            
+            alert("Log out")
             const response = await axios.get('http://localhost:3000/auth/sign-out',{ withCredentials: true });
             console.log(response)
     
@@ -55,6 +55,7 @@ function AuthProvider({ children }) {
         setIsAuth,
         setEmployee,
         singOut
+        
     };
     return (
         <AuthContext.Provider value={authGloblaState}>
