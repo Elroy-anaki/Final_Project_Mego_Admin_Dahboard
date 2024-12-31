@@ -3,7 +3,8 @@ import TablesOrdersRow from './TablesOrdersRow';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import FilterZone from '../../../common/FilterZone/FilterZone';
-
+import ExportButton from '../../../common/Buttons/ExportButton';
+import { downloadOrders } from '../../../../lib/exportXL/exportXL';
 
 const filterBtn = [
   {title: "All", value: "all"},
@@ -35,6 +36,8 @@ const TablesOrdersTable = () => {
 
   return (
     <div>
+                  <ExportButton download={() => downloadOrders(status)} />
+
       <FilterZone fn={handelFilter} btnData={filterBtn} />
       <div className="w-full border-2 border-sky-800 ">
         
