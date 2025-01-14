@@ -6,12 +6,13 @@ import axios from 'axios';
 
 // Import Components + Context
 import { MealContext } from '../../../Contexts/MealContext';
-import MealTable from './MealTable'
+import MealTable from './MealTable';
 import { AddButton } from '../../common/Buttons/addButtons'
 import Pagination from '../../common/Pagination/Pagination';
 import SearchInput from '../../common/SearchInput/SearchInput';
 import ExportButton from '../../common/Buttons/ExportButton';
-import {downloadMeals} from "../../../lib/exportXL/exportXL"
+import {downloadMeals} from "../../../lib/exportXL/exportXL";
+import FilterZone from '../../common/FilterZone/FilterZone';
 
 function MealSection() {
 
@@ -75,7 +76,10 @@ function MealSection() {
             </div>
 
             <Pagination CountOfItems={data?.count} changeState={setPage} page={page} limit={limit} />
+            <FilterZone />
           </div>
+          
+
 
         </div>
         {isLoading && <span className="loading loading-infinity loading-xs text-sky-700"></span>}

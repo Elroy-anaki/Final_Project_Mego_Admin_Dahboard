@@ -52,11 +52,15 @@ function TablesOrdersRow({ orderTable }) {
                     className={`border border-gray-300 rounded-md px-4 py-2 
             ${orderTable.status === 'paid' ? 'bg-purple-400' : ''}
             ${orderTable.status === 'eating' ? 'bg-green-400' : ''}
-            ${orderTable.status === 'completed' ? 'bg-rose-600 ' : ''}`}
+            ${orderTable.status === 'completed' ? 'bg-rose-400 ' : ''}
+            ${orderTable.status === 'canceled' ? 'bg-rose-800 ' : ''}
+            `
+        }
                 >
                     <option value="paid" className='bg-purple-400 px-4 py-2'>Paid</option>
                     <option value="eating" className='bg-green-400 px-4 py-2'>Eating</option>
-                    <option value="completed" className='bg-rose-600 px-4 py-2'>Completed</option>
+                    <option value="completed" className='bg-rose-400 px-4 py-2'>Completed</option>
+                    <option value="canceled" className='bg-rose-800 px-4 py-2'>Canceled</option>
                 </select>
             </td>
 
