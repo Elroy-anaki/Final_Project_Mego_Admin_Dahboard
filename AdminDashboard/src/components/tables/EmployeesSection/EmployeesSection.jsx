@@ -60,7 +60,9 @@ function EmployeesSection() {
                     <div
                         className=' text-center flex justify-start items-center'>
                         <div
-                            onClick={() => document.getElementById('addEmployeeModal').showModal()}
+                            onClick={() => {
+                                setEmployee(null)
+                                document.getElementById('addEmployeeModal').showModal()}}
                             className=''
                         >
                             <AddButton text='Add Employee +' />

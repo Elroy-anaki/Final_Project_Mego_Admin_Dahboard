@@ -10,8 +10,8 @@ import { MealsForOrderContext } from '../../../../Contexts/MealsForOrderContext'
 function TablesOrdersRow({ orderTable }) {
 
 
-    const { setMealsForOrder} = useContext(MealsForOrderContext)
-    console.log(orderTable)
+    const { setMealsForOrder } = useContext(MealsForOrderContext)
+
     const queryclient = useQueryClient()
 
     const { mutate: changeStatus } = useMutation({
@@ -31,32 +31,32 @@ function TablesOrdersRow({ orderTable }) {
 
     return (
         <tr className="hover:bg-sky-100 ">
-            <td className="px-6 py-4 text-md font-semibold text-gray-900 text-center">#{String(orderTable._id).slice(0, 7)}</td>
+            <td className="px-6 py-4 text-md font-semibold text-gray-900 text-center">#{String(orderTable._id).slice(0, 4)}</td>
             <td className="px-6 py-4 text-md text-gray-900 text-center">{orderTable.user.userName}</td>
             <td className="px-6 py-4 text-md text-gray-900 text-center ">{orderTable.numberOfGuests}</td>
             <td className="px-6 py-4 text-md text-center cursor-pointer"
-                onClick={() => {document.getElementById('mealsForOrderModal').showModal()
+                onClick={() => {
+                    document.getElementById('mealsForOrderModal').showModal()
                     console.log(orderTable.table.meals)
                     setMealsForOrder(orderTable.table.meals)
                 }}>
-            Meals <span className='text-xs'>({orderTable.table.meals.length})</span></td>
+                Meals <span className='text-xs'>({orderTable.table.meals.length})</span></td>
             <td className="px-6 py-4 text-lg font-semibold text-gray-900 text-center ">{orderTable?.table?.totalPrice || 0}$</td>
             <td className="px-6 py-4 text-md text-center flex flex-col gap-1 font-semibold">
                 <div>{orderTable.dateTime.date}</div>
                 <div className='text-sm'>{orderTable.dateTime.time}</div></td>
             <td className="px-6 py-4 text-sm text-center">
                 <select
-                disabled={orderTable.status === 'paid'}
                     onChange={(e) => changeStatus({ newStatus: e.target.value, type: 'orderTable' })}
                     value={orderTable.status}
                     className={`border border-gray-300 rounded-md px-4 py-2 
-            ${orderTable.status === 'pending' ? 'bg-purple-400' : ''}
+            ${orderTable.status === 'paid' ? 'bg-purple-400' : ''}
             ${orderTable.status === 'eating' ? 'bg-green-400' : ''}
-            ${orderTable.status === 'paid' ? 'bg-rose-600 ' : ''}`}
+            ${orderTable.status === 'completed' ? 'bg-rose-600 ' : ''}`}
                 >
-                    <option value="pending" className='bg-purple-400 px-4 py-2'>Pending</option>
+                    <option value="paid" className='bg-purple-400 px-4 py-2'>Paid</option>
                     <option value="eating" className='bg-green-400 px-4 py-2'>Eating</option>
-                    <option value="paid" className='bg-rose-600 px-4 py-2'>Paid</option>
+                    <option value="completed" className='bg-rose-600 px-4 py-2'>Completed</option>
                 </select>
             </td>
 

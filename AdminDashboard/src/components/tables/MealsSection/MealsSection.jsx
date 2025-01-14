@@ -30,12 +30,14 @@ function MealSection() {
       const { data } = await axios.get(`/meals/get-all-meals?page=${page}&search=${field}&sortBy=${sort}&limit=${limit}`)
       return data;
     },
-    staleTime: 1000 * 6
+    staleTime: 1000 * 6,
+    retry: 2,
+    refetchOnWindowFocus: false
   });
 
   function showMealFromSuggestion(item){
       setMeal(item);
-      document.getElementById('mealDatails').showModal();
+      document.getElementById('mealDetails').showModal();
   };
 
   function handelSort(field, sort){

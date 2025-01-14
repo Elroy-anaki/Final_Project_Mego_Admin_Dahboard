@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Formik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../Input";
@@ -6,6 +6,7 @@ import Input from "../Input";
 import axios from "axios";
 import { AuthContext } from '../../../Contexts/AuthContext'
 import { notifySuccess ,notifyError } from "../../../lib/Toasts/Toasts";
+import { useQuery } from "@tanstack/react-query";
 
 
 
@@ -17,6 +18,18 @@ const initialEmployeeValues = {
 
 function SignIn() {
   const { setIsAuth,setEmployee } = useContext(AuthContext);
+  const [restaurant, setRestaurant] = useState(null)
+
+  const {data, isError, isLoading} = useQuery({
+    queryKey:['getRestaurant'],
+    queryFn: async () => {
+        const {data} = await axios.get('/restaurant/get-restaurant');
+        setRestaurant(data.data)
+        console.log("data.data", data.data)
+        return data
+    },
+    staleTime: 1000 * 300
+})
 
   const sendToServer = async (newEmployeeData) => {
     try {
@@ -34,7 +47,7 @@ function SignIn() {
 
   return (
     <div className="font-[sans-serif] bg-white max-w-4xl flex items-center justify-center items mx-auto rounded-lg h-screen">
-      <h1 className="absolute top-8 text-5xl">KitchenAI</h1>
+      <h1 className="absolute top-8 text-5xl">{restaurant?.restaurantName}</h1>
       <div className="grid grid- md:grid-cols-3 items-center shadow-2xl rounded-xl overflow-hidden ">
         <div className="max-md:order-1 flex flex-col justify-center space-y-16 max-md:mt-16 min-h-full bg-gradient-to-r from-sky-950 to-sky-800 lg:px-8 px-4 py-4">
           <div>

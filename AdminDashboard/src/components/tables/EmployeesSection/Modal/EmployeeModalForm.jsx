@@ -25,7 +25,7 @@ function EmployeeModalForm() {
 
   const { employee, setEmployee } = useContext(EmployeeContext);
   const [employeeValues, setValues] = useState(initialValues)
-
+  
   useEffect(() => {
     if (employee) {
       setValues({
@@ -41,6 +41,7 @@ function EmployeeModalForm() {
   const { mutate: addOrEditEmployee } = useMutation({
     mutationKey:['addOrEditEmployee'],
     mutationFn: async (employeeDetails) => {
+
       const { data } = await axios({
         method: employee ? "PUT" : "POST",
         data: employeeDetails,
@@ -50,7 +51,8 @@ function EmployeeModalForm() {
       return data
     },
     onSuccess: async (data) =>{
-      await queryClient.invalidateQueries({queryKey: ['getAllemployees']})
+      await queryClient.invalidateQueries({queryKey: ['getAllemployees']});
+      setEmployee(null)
       console.log(data)
 
     }
@@ -62,10 +64,10 @@ function EmployeeModalForm() {
       validationSchema={validationSchema}
       enableReinitialize
       onSubmit={async (values, actions) => {
+        console.log("employeeemployee", employee)
         addOrEditEmployee(values);
         actions.resetForm()
         document.getElementById('addEmployeeModal').close();
-        setEmployee(null)
       }}
     >
       {({ values, handleChange, handleBlur, errors, touched, isSubmitting }) => (
@@ -73,7 +75,9 @@ function EmployeeModalForm() {
           <div className="w-full max-w-2xl bg-white  overflow-hidden">
             <div className="p-4">
               <div className="max-w-md mx-auto">
-                <h1 className="text-2xl font-bold mb-8 text-gray-800">
+                <h1 
+                onClick={() => console.log(employee)}
+                className="text-2xl font-bold mb-8 text-gray-800">
                   {employee ? "Edit Employee" : "Add New Employee"}
                 </h1>
                 <Form id="addEmployeeForm" className="space-y-4">

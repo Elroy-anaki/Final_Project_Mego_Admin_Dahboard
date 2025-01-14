@@ -54,19 +54,19 @@ function SideBar() {
                 <span className="flex-1 ms-3 whitespace-nowrap">Orders</span>
               </Link>
             </li>
-            <li>
+            {employee.premission === 'admin' ?<li>
               <Link to={'/dashboard/meals'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                 <span><GiMeal size={20} /></span>
                 <span className="flex-1 ms-3 whitespace-nowrap">Meals</span>
               </Link>
-            </li>
-            <li>
+              </li> : null}
+              {employee.premission === 'admin' ?<li>
               <Link to={'/dashboard/users'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <span><FaRegUser size={20} /></span>
                 <span className="flex-1 ms-3 whitespace-nowrap">Users</span>
               </Link>
-            </li>
+              </li> : null}
             <li>
               <Link to={'/dashboard/profile'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <span><CgProfile size={20} /></span>

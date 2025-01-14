@@ -57,7 +57,7 @@ function App() {
       <Route path="/" element={<Root isAuth={isAuth} />} errorElement={<ErrorPage />}>
 
         {/* Public Routes */}
-        <Route element={!isAuth ? <Outlet /> : <Navigate to={"/dashboard/meals"} />} >
+        <Route element={!isAuth ? <Outlet /> : <Navigate to={"/dashboard/orders"} />} >
           <Route index element={<SignIn />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

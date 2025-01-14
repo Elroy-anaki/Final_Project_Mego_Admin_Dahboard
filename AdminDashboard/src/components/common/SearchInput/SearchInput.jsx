@@ -27,7 +27,7 @@ function SearchInput({ id, searchValue, setSearchInput, suggestions = [], showFr
                     {suggestions.map((item, index) => (
                         <p
                             key={index}
-                            onClick={() => showFromSuggestion(item)}
+                            onClick={() => {showFromSuggestion(item); console.log(item)}}
                         >
                             {item[keyName]}
                         </p>

@@ -107,7 +107,7 @@ function MealDetailsModal() {
                                     >
                                         <div className="flex items-center justify-between mb-2">
                                             <span className="font-semibold text-gray-800">
-                                                {review.user.name}
+                                                {review?.user?.name}
                                             </span>
                                             <div className="flex items-center gap-1">
                                                 <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
