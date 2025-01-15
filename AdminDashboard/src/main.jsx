@@ -7,17 +7,12 @@ import App from './App.jsx';
 import { QueryClient, QueryClientProvider, } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 
-// Import Contexts
-import MealProvider from './Contexts/MealContext.jsx';
+// Import Providers
 import AuthProvider from './Contexts/AuthContext.jsx';
-
-// Import Modals
-
 
 // Import UI
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { EmployeeContext } from './Contexts/EmployeeContext.jsx';
 
 
 createRoot(document.getElementById('root')).render(
