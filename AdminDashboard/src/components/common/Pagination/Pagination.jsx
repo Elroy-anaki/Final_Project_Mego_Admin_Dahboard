@@ -20,24 +20,24 @@ function Pagination({changeState, CountOfItems: countOfItems, page, limit}) {
 
   return (
     <div
-    className=''>
+    className='mt-2'>
     <nav >
   <ul className="inline-flex -space-x-px text-sm h-10  ">
     <li
         onClick={handelPrevious}>
       <button 
       disabled={page === 1} 
-      className=" rounded-r-none  cursor-pointer flex items-center justify-center px-3 h-full  ms-0 leading-tight text-white bg-sky-800 font-semibold text-base  ">Previous</button>
+      className="rounded-l-lg  cursor-pointer flex items-center justify-center p-6 h-full  ms-0 leading-tight text-white bg-sky-800 font-semibold text-base  ">Previous</button>
     </li>
       {numberOfbtns.map((btn) => (<li
     onClick={() => changeState(btn)}>
-      <div  className="cursor-pointer flex items-center justify-center px-3 h-full leading-tight text-sky-500 bg-white  hover:bg-sky-100 hover:text-sky-700 dark:bg-sky-800  dark:text-white dark:hover:bg-sky-700 dark:hover:text-white">{btn}</div>
+      <div  className={`cursor-pointer flex items-center justify-center p-6 h-full leading-tight text-sky-500 bg-white  hover:bg-sky-100 hover:text-sky-700  ${page === btn ? 'dark:bg-sky-700': 'dark:bg-sky-800'}  dark:text-white dark:hover:bg-sky-700 dark:hover:text-white`}>{btn}</div>
     </li>))}
     <li
         onClick={handelNext}>
       <button 
       disabled={page === pages} 
-      className="cursor-pointer flex items-center justify-center px-3 h-full leading-tight text-base   rounded-tr-lg rounded-l-none bg-sky-800 text-white font-semibold">Next</button>
+      className="cursor-pointer flex items-center justify-center p-6 h-full leading-tight text-base   rounded-r-lg rounded-l-none bg-sky-800 text-white font-semibold">Next</button>
     </li>
   </ul>
 </nav>

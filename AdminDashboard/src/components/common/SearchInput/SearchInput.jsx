@@ -19,7 +19,7 @@ function SearchInput({ id, searchValue, setSearchInput, suggestions = [], showFr
                 value={inputValue}
                 type="search"
                 id={id}
-                className="block  rounded-r-none w-full py-2.5 ps-10 text-sm text-white border bg-sky-700 border-none placeholder-white"
+                className="block  rounded-tr-lg w-full py-2.5 ps-10 text-sm text-white border bg-sky-700 border-none placeholder-white"
                 placeholder={`Search ${searchValue}...`}
             />
             {inputValue && suggestions?.length > 0 && (
