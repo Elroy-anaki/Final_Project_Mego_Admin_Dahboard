@@ -12,19 +12,20 @@ import EmployeeModal from './components/tables/EmployeesSection/Modal/EmployeeMo
 import MealModal from './components/tables/MealsSection/Modals/MealModal.jsx';
 import SignIn from './forms/Auth/SignIn/SignIn'
 import SideBar from "./pages/SideBar/SideBar";
-import { useContext } from "react";
 import EmployeesSection from "./components/tables/EmployeesSection/EmployeesSection";
 import OrdersSection from "./components/tables/ordersSection/OrdersSection";
 import MealsSection from "./components/tables/MealsSection/MealsSection";
 import UsersSection from "./components/tables/UsersSections/UsersSection";
 import ProfileSection from "./components/tables/profileSection/ProfileSection.jsx";
 import ResetPassword from "./forms/Auth/ResetPassword/ResetPassword";
-import { AuthContext } from './Contexts/AuthContext';
 import ForgotPassword from "./forms/Auth/ForgotPassword/ForgotPassword";
 import MealDetailsModal from "./components/tables/MealsSection/Modals/MealDetailsModal.jsx";
-import ErrorPage from "./pages/ErrorPage.jsx";
+import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx";
 import MealsForOrderModal from "./components/tables/ordersSection/TablesOrders/Modal/MealsForOrderModal.jsx";
 import CategoryModal from "./components/tables/MealsSection/Modals/CategoryModal.jsx";
+
+import { useContext } from "react";
+import { AuthContext } from './Contexts/AuthContext';
 
 
 function Root({ isAuth }) {

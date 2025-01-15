@@ -17,7 +17,7 @@ function AuthProvider({ children }) {
         try {
             const { data } = await axios.get('/auth/verify-token')
             setIsAuth(data.success)
-            setEmployee(data.data.data)
+            setEmployee(data.data.payload)
             console.log("Data", data.data)
         } catch (error) {
             console.error(error)
