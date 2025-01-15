@@ -11,16 +11,16 @@ function MealsForOrderModal() {
     const [meals, setMeals] = useState(null)
     const [chosenCategory, setChosenCategory] = useState(null)
 
-    const { mutate: getAllMeals } = useMutation({
-        mutationKey: ['getAllMeals'],
-        mutationFn: async () => {
-            const { data } = await axios.get(`/meals/get-all-meals`);
-            return data;
-        },
-        onSuccess: (data) => {
-            console.log(data);
-        },
-    });
+    // const { mutate: getAllMeals } = useMutation({
+    //     mutationKey: ['getAllMeals'],
+    //     mutationFn: async () => {
+    //         const { data } = await axios.get(`/meals/get-all-meals`);
+    //         return data;
+    //     },
+    //     onSuccess: (data) => {
+    //         console.log(data);
+    //     },
+    // });
     const { mutate: getCategories } = useMutation({
         mutationFn: async () => await axios.get('/categories/get-all-categories'),
         onSuccess: (data) => {

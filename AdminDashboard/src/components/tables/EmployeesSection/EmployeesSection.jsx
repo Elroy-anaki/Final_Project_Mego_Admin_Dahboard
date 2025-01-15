@@ -20,7 +20,7 @@ const filterBtn = [
 function EmployeesSection() {
     const { setEmployee } = useContext(EmployeeContext)
     const [page, setPage] = useState(1)
-    const [limit, setLimit] = useState(5)
+    const [limit, setLimit] = useState(4)
     const [premission, setPremission] = useState('all')
     const [suggestions, setSearchInput] = useSearch('employees');
 
@@ -40,6 +40,7 @@ function EmployeesSection() {
     }
 
     function showEmployeeFromSuggestion(item) {
+        console.log(item)
         setEmployee(item);
         document.getElementById('addEmployeeModal').showModal();
     }
@@ -79,7 +80,6 @@ function EmployeesSection() {
                             />
                         </div>
 
-                        <Pagination CountOfItems={data?.count} changeState={setPage} page={page} limit={limit} />
                     </div>
                     <div>
                         <FilterZone fn={handelFilter} btnData={filterBtn} />
@@ -91,6 +91,10 @@ function EmployeesSection() {
             </div>
             <div className='z-10'>
                 {data && <EmployeesTable employees={data.data} />} </div>
+                <div className='flex justify-center'>
+                <Pagination CountOfItems={data?.count} changeState={setPage} page={page} limit={limit} />
+
+                </div>
         </div>
     )
 }

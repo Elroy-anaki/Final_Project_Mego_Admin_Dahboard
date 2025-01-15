@@ -18,7 +18,8 @@ const TablesOrdersTable = () => {
   const [status, setStatus] = useState('paid')
   const [sort, setSort] = useState('1')
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(4);
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
 
 
   function handelFilter(status) {
@@ -27,21 +28,28 @@ const TablesOrdersTable = () => {
   }
 
   const { data } = useQuery({
-    queryKey: ['getAllTablesOrders', status],
+    queryKey: ['getAllTablesOrders', status, date],
     queryFn: async () => {
-      const response = await axios.get(`/orders/get-all-orders-tables?status=${status}&sortBy=${sort}&limit=${limit}`);
-      console.log("response.dataaaaaaaa", response.data);
-      return response.data;
+      const { data } = await axios.get(`/orders/get-all-orders-tables?status=${status}&date=${date}&sortBy=${sort}&limit=${limit}`);
+      console.log("response.dataaaaaaaa", data);
+      return data;
     },
-    select: (data) => data.data,
     staleTime: 1000 * 6000
   });
 
 
   return (
     <div>
-      <div className='flex  '>
-        <FilterZone fn={handelFilter} btnData={filterBtn} />
+      <div className='flex justify-between '>
+        <div><input
+          placeholder={date}
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          // min={new Date().toISOString().split('T')[0]}
+          className='bg-sky-700 p-[7px] rounded-t-lg text-white'
+          type="date" name="" id="" /></div>
+        <div className=''><FilterZone fn={handelFilter} btnData={filterBtn} /></div>
+
 
       </div>
       <div className="w-full border-2 border-sky-800 ">
@@ -60,12 +68,16 @@ const TablesOrdersTable = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {data && data?.map((orderTable, index) => <TablesOrdersRow key={index} orderTable={orderTable} />)}
+            {data && data.data?.map((orderTable, index) => <TablesOrdersRow key={index} orderTable={orderTable} />)}
 
           </tbody>
         </table>
 
       </div>
+      <div className='flex justify-center'>
+        <Pagination CountOfItems={data?.count} changeState={setPage} page={page} limit={limit} />
+      </div>
+
 
 
     </div>
