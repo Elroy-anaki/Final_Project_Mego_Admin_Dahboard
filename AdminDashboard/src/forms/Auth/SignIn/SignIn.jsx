@@ -34,7 +34,7 @@ function SignIn() {
   const sendToServer = async (newEmployeeData) => {
     try {
         const { data } = await axios.post(`/employees/sign-in`, newEmployeeData)
-        setEmployee(data.data.payload)
+        setEmployee(data.data)
         setIsAuth(true)
         console.log(data)
         notifySuccess(`Welcome Back, ${data.data.payload.employeeName}`)
