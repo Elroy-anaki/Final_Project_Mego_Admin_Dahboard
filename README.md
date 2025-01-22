@@ -1,4 +1,4 @@
-# Plate Ahead - Client
+# Plate Ahead - Admin
 
 
 ## A Special Restaurant App 
