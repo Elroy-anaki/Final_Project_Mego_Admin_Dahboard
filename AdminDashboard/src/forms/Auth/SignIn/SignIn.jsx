@@ -19,6 +19,7 @@ const initialEmployeeValues = {
 function SignIn() {
   const { setIsAuth,setEmployee } = useContext(AuthContext);
   const [restaurant, setRestaurant] = useState(null)
+  const navigate = useNavigate()
 
   const {data, isError, isLoading} = useQuery({
     queryKey:['getRestaurant'],
@@ -31,13 +32,15 @@ function SignIn() {
     staleTime: 1000 * 300
 })
 
-  const sendToServer = async (newEmployeeData) => {
+  const sendToServer = async (employeeData) => {
     try {
-        const { data } = await axios.post(`/employees/sign-in`, newEmployeeData)
+        const { data } = await axios.post(`/employees/sign-in`, employeeData)
+        console.log("data.datadata.datadata.datadata.data", data.data)
         setEmployee(data.data)
         setIsAuth(true)
         console.log(data)
-        notifySuccess(`Welcome Back, ${data.data.payload.employeeName}`)
+        notifySuccess(`Welcome Back, ${data.data.payload.employeeName}`);
+        navigate("/dashboard")
         
     } catch (error) {
         console.log(error.response.data.msg)
