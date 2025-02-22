@@ -25,5 +25,5 @@ createRoot(document.getElementById('root')).render(
 );
 
 // Define the default in axios
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = VITE_API_BASE_URL_PRODUCTION;
 axios.defaults.withCredentials = true;
