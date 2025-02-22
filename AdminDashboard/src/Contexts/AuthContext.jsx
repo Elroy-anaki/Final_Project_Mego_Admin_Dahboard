@@ -33,7 +33,7 @@ function AuthProvider({ children }) {
     const singOut = async () => {
         try {
             
-            const response = await axios.get('http://localhost:3000/auth/sign-out',{ withCredentials: true });
+            const response = await axios.get('/auth/sign-out');
             console.log(response)
     
             if (response.status === 200) {
