@@ -25,5 +25,5 @@ createRoot(document.getElementById('root')).render(
 );
 
 // Define the default in axios
-axios.defaults.baseURL = VITE_API_BASE_URL_PRODUCTION;
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL_PRODUCTION;
 axios.defaults.withCredentials = true;
